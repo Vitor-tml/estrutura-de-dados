@@ -13,6 +13,8 @@ O usuário tem as seguintes opções:
 10. Ler a lista de um arquivo (no formato "nome","RG").
 11. Sair.
 
+Em toda operação apresentar o Nome, RG, C_(n), M_(n), tempo de execução e posição N na lista.
+
 Obs.: Usar busca sequencial.
 
 # Como fazer:
