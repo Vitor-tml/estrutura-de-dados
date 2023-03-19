@@ -41,6 +41,10 @@ testefunc:
 	make funcoes
 	gcc ./main.c ./obj/funcoes.o -I ./include -o ./output/main.exe
 
+repositorio:
+	mkdir ./output
+	mkdir ./obj
+	
 clear:
 	rm ./output/main.exe
 	rm ./obj/encadeada.o
