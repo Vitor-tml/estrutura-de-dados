@@ -1,17 +1,16 @@
-#include <stdio.h>
-#include <stdlib.h>
-
+// Define o nó da Lista Encadeada.
 typedef struct no_encadeada
 {
     struct no_encadeada *anterior;
     char nome[15];
     int rg;
-    struct no_encadeada *proximo;
-} No_encadeada;
+    struct no_encadeada *proxima;
+}Registro_Encadeada;
 
-typedef struct
+// Cabeçalho da Lista Encadeada.
+typedef struct lista_encadeada
 {
-    No_encadeada *primeiroElemento;
+    Registro_Encadeada *primeiro;
+    Registro_Encadeada *ultimo;
     int tamanho;
-    No_encadeada *ultimoElemento;
-} Encadeada;
+}Encadeada;
