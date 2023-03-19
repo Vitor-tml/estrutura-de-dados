@@ -20,3 +20,13 @@ Obs.: Usar busca sequencial.
 # Como fazer:
 
 1. Menu.
+2. Lista sequencial
+3. Entrada por arquivo
+4. Entrada Manual.
+5. Método da lista sequencial
+6. Lista encadeada
+7. Método da lista encadeade
+
+
+# Dúvidas
+1. Perguntar sobre LF e CRLF para o professor.
