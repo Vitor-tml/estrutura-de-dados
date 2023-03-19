@@ -1,52 +1,54 @@
-#include "sequencial.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
+#include "sequencial.h"
 
-// Aloca memória para uma lista sequencial
-void alocaListaSeq(Sequencial *lista)
+
+// Cria Lista Sequencial vazia com uma quantidade de registros máxima.
+void iniciaSequencial(Sequencial *lista, int nRegistros)
 {
-    lista->data = (No_sequencial *) malloc(lista->capacidade * sizeof(No_sequencial));
-    if(lista->data == NULL)
+    lista->registro = (Registro_Sequencial *)malloc(nRegistros * sizeof(Registro_Sequencial));
+    if (lista->registro == NULL)
     {
-        printf("Erro na alocacao da Lista Sequencial.\n");
+        printf("Problema ao iniciar Lista Sequencial.\n");
         exit(1);
     }
-    return;
+    lista->nMax = nRegistros;
+    lista->nElementos = 0;
 }
 
-// Preenche lista sequencial com nome e RG aleatório.
-void preencheSeq(Sequencial *lista)
+// Imprime na tela todos os elementos válidos da Lista Sequencial.
+void exibeSequencial(Sequencial *lista)
 {
     int i;
-    char nomes[10][10] = {
-        "Maria",
-        "Joao",
-        "Ana",
-        "Pedro",
-        "Beatriz",
-        "Rafael",
-        "Fernanda",
-        "Gustavo",
-        "Aline",
-        "Lucas"
-    };
+    for (i = 0; i < lista->nElementos; i++)
+        printf("Nome: %-10s RG: %d\n", lista->registro[i].nome, lista->registro[i].rg);
+}
 
-    for(i = 0; i < lista->capacidade; i++)
+// Preenche todos os registros de uma Lista Sequencial.
+void preencheSequencial(Sequencial *lista)
+{
+    char nome[10][10] = {"Ana",
+                         "Beatriz",
+                         "Caua",
+                         "Diego",
+                         "Elisa",
+                         "Fernanda",
+                         "Gabriel",
+                         "Heloisa",
+                         "Isabela",
+                         "Joao"};
+    int i;
+    lista->nElementos = lista->nMax;
+    for (i = 0; i < lista->nElementos; i++)
     {
-        strcpy(lista->data[i].nome, nomes[rand()%10]);
-        lista->data->rg = rand() % 1000000000;
+        strcpy(lista->registro[i].nome, nome[rand() % 10]);
+        lista->registro[i].rg = rand() % 100000000;
     }
-    return;
 }
 
-// Imprime na tela uma lista sequencial.
-void exibeSeq(Sequencial *lista)
+// Retorna a quantidade de registros de uma Lista Sequencial.
+int contagemSequencial(Sequencial *lista)
 {
-    int i;
-
-    for(i = 0; i < lista->tamanho; i++)
-        printf("Nome: %-10s RG: %d\n", lista->data[i].nome, lista->data[i].rg);
-    return;
+   return lista->nElementos; 
 }

@@ -1,18 +1,18 @@
-// Definição do Nó da lista sequencial
-typedef struct
+// Define os registros da Lista Sequencial como Nome e RG.
+typedef struct no_sequencial
 {
     char nome[15];
     int rg;
-} No_sequencial;
+} Registro_Sequencial;
 
-typedef struct
+// Cabeçalho da Lista Sequencial.
+typedef struct lista_sequencial
 {
-    No_sequencial *data;
-    int capacidade;
-    int tamanho;
+    Registro_Sequencial *registro;
+    int nElementos;
+    int nMax;
 } Sequencial;
 
-// Declaração das funções
-void alocaListaSeq(Sequencial *lista);
-void preencheSeq(Sequencial *lista);
-void exibeSeq(Sequencial *lista);
+void iniciaSequencial(Sequencial *lista, int nRegistros);
+void exibeSequencial(Sequencial *lista);
+void preencheSequencial(Sequencial *lista);
