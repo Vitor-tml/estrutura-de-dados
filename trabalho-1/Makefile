@@ -14,6 +14,7 @@ all:
 	@echo -e "\033[32mExecutando...\n---------------------\033[0m"
 	@sleep 1
 	@make exe -s
+
 sequencial:
 	gcc -c ./src/sequencial.c -I ./include -o ./obj/sequencial.o 
 
@@ -29,6 +30,17 @@ main:
 exe:
 	./output/main.exe
 
+repositorio:
+	mkdir ./output
+	mkdir ./obj
+	
+clear:
+	rm ./output/main.exe
+	rm ./obj/encadeada.o
+	rm ./obj/sequencial.o
+	rm ./obj/funcoes.o 
+
+
 testeseq:
 	make sequencial
 	gcc ./main.c ./obj/sequencial.o -I ./include -o ./output/main.exe 
@@ -40,13 +52,3 @@ testeenc:
 testefunc:
 	make funcoes
 	gcc ./main.c ./obj/funcoes.o -I ./include -o ./output/main.exe
-
-repositorio:
-	mkdir ./output
-	mkdir ./obj
-	
-clear:
-	rm ./output/main.exe
-	rm ./obj/encadeada.o
-	rm ./obj/sequencial.o
-	rm ./obj/funcoes.o 

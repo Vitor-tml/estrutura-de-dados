@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include <time.h>
 //#include "funcoes.h"
-//#include "encadeada.h"
-#include "sequencial.h"
+#include "encadeada.h"
+//#include "sequencial.h"
 
 int main()
 {
     srand(time(NULL));
-    Sequencial lista;
-    iniciaSequencial(&lista, 10);
-    preencheSequencial(&lista);
-    exibeSequencial(&lista);
+    Encadeada lista;
+    iniciaEncadeada(&lista);
+    preencheEncadeada(&lista);
+    exibeEncadeada(&lista);
     return 0;
 }

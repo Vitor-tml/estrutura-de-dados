@@ -30,3 +30,4 @@ Obs.: Usar busca sequencial.
 
 # Dúvidas
 1. Perguntar sobre LF e CRLF para o professor.
+   1. Resposta: A linguagem toma conta do resultado se usar função de alto nível.
