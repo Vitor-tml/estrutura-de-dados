@@ -16,3 +16,6 @@ typedef struct lista_sequencial
 void iniciaSequencial(Sequencial *lista, int nRegistros);
 void exibeSequencial(Sequencial *lista);
 void preencheSequencial(Sequencial *lista);
+void adicionaFinalSequencial(char nome[15], int rg,  Sequencial *lista);
+void adicionaInicioSequencial(char nome[15], int rg,  Sequencial *lista);
+void *maloka(void *origem, size_t tamanho);
