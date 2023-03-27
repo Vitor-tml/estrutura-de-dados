@@ -2,20 +2,20 @@
 #include <stdlib.h>
 #include <time.h>
 //#include "funcoes.h"
-//#include "encadeada.h"
-#include "sequencial.h"
+#include "encadeada.h"
+//#include "sequencial.h"
 
 int main()
 {
     srand(time(NULL));
-    Sequencial lista;
+    Encadeada lista;
     char nome[15] = "vitor";
-    iniciaSequencial(&lista, 5);
+    iniciaEncadeada(&lista);
     printf("Sem\n-----------------\n");
-    preencheSequencial(&lista);
-    exibeSequencial(&lista);
-    adicionaFinalSequencial(nome, 141450808, &lista);
+    preencheEncadeada(&lista);
+    exibeEncadeada(&lista);
+    adicionaInicioEncadeada(nome, 141450808, &lista);
     printf("Com\n-----------------\n");
-    exibeSequencial(&lista);
+    exibeEncadeada(&lista);
     return 0;
 }

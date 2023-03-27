@@ -50,6 +50,20 @@ void preencheEncadeada(Encadeada *lista)
     }
 }
 
+void adicionaInicioEncadeada(char nome[15], int rg, Encadeada *lista)
+{
+    // Define o novo nó e seus valores
+    Registro_Encadeada *novoRegistro = (Registro_Encadeada *) malloc(sizeof(Registro_Encadeada));
+    strcpy(novoRegistro->nome, nome);
+    novoRegistro->rg = rg;
+    novoRegistro->proximo = NULL;
+    novoRegistro->anterior = lista->primeiro;
+
+    // Atualiza inicio da Lista Encadeada
+    lista->primeiro->anterior = novoRegistro;
+    lista->primeiro = novoRegistro;
+    lista->tamanho++;
+}
 // Retorna a quantidade de registros em uma Lista Encadeada.
 int contagemEncadeada(Encadeada *lista)
 {
