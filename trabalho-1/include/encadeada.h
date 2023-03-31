@@ -17,6 +17,9 @@ typedef struct lista_encadeada
 
 void iniciaEncadeada(Encadeada *lista);
 void exibeEncadeada(Encadeada *lista);
-void preencheEncadeada(Encadeada *lista);
+void preencheEncadeada(Encadeada *lista, int tamanho);
 int contagemEncadeada(Encadeada *lista);
 void adicionaInicioEncadeada(char nome[15], int rg, Encadeada *lista);
+void adicionaFinalEncadeada(char nome[15], int rg, Encadeada *lista);
+void removeInicioEncadeada(Encadeada *lista);
+void removeFinalEncadeada(Encadeada *lista);

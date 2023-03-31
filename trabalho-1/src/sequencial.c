@@ -53,6 +53,19 @@ int contagemSequencial(Sequencial *lista)
    return lista->nElementos; 
 }
 
+// Redimensiona um vetor para lista sequencial
+void *maloka(void *origem, size_t tamanho)
+{
+    void *destino = malloc(tamanho);
+    if(destino == NULL)
+        return NULL;
+     
+    memcpy(destino, origem, tamanho);
+    free(origem);
+
+    return destino;
+}
+
 // Adiciona ou cria um novo registro na lista.
 void adicionaFinalSequencial(char nome[15], int rg,  Sequencial *lista)
 {
@@ -69,6 +82,7 @@ void adicionaFinalSequencial(char nome[15], int rg,  Sequencial *lista)
     lista->registro[lista->nElementos++] = novoRegistro;
 }
 
+// Adiciona registro no inicio da Lista Sequencial
 void adicionaInicioSequencial(char nome[15], int rg,  Sequencial *lista)
 {
     Registro_Sequencial novoRegistro;
@@ -91,15 +105,41 @@ void adicionaInicioSequencial(char nome[15], int rg,  Sequencial *lista)
     lista->registro[0] = novoRegistro;
 }
 
-// Redimensiona um vetor
-void *maloka(void *origem, size_t tamanho)
+// Remove o primeiro registro da lista sequencial
+void removeInicioSequencial(Sequencial *lista)
 {
-    void *destino = malloc(tamanho);
-    if(destino == NULL)
-        return NULL;
-     
-    memcpy(destino, origem, tamanho);
-    free(origem);
+    // Testes de possibilidade da operação
+    if(lista->registro == NULL)
+    {
+        printf("Problema ao retirar do inicio da lista\n.");
+        return;
+    }
+    if(lista->nElementos == 0)
+    {
+        printf("Lista vazia\n.");
+        return;
+    }
+    int i;
+    lista->nElementos--;
+    for(i = 0; i < lista->nElementos; i ++)
+        lista->registro[i] = lista->registro[i+1];
 
-    return destino;
+}
+
+// Remove o último registro da lista sequencial
+void removeFinalSequencial(Sequencial *lista)
+{
+    // Testes de possibilidade da operação
+    if(lista->registro == NULL)
+    {
+        printf("Problema ao retirar do inicio da lista\n.");
+        return;
+    }
+    if(lista->nElementos == 0)
+    {
+        printf("Lista vazia\n.");
+        return;
+    }
+    int i;
+    lista->nElementos--;
 }

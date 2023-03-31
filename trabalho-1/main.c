@@ -3,7 +3,6 @@
 #include <time.h>
 //#include "funcoes.h"
 #include "encadeada.h"
-//#include "sequencial.h"
 
 int main()
 {
@@ -12,9 +11,9 @@ int main()
     char nome[15] = "vitor";
     iniciaEncadeada(&lista);
     printf("Sem\n-----------------\n");
-    preencheEncadeada(&lista);
+    preencheEncadeada(&lista, 10);
     exibeEncadeada(&lista);
-    adicionaInicioEncadeada(nome, 141450808, &lista);
+    removeFinalEncadeada(&lista);
     printf("Com\n-----------------\n");
     exibeEncadeada(&lista);
     return 0;
