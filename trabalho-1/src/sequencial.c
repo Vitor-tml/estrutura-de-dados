@@ -224,6 +224,8 @@ void arquivoParaSequencial(Sequencial *lista, FILE *arquivo, int nLinhas)
     int i;
     int rg;
     char nome[TAM];
+    if(lista->registro != NULL) // Caso a lista já registros esses serão perdidos
+        free(lista->registro);
     iniciaSequencial(lista, nLinhas);
     
     for(i = 0; i < nLinhas; i++)

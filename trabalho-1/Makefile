@@ -3,8 +3,8 @@ all:
 	@echo -e "\033[33mSequencial - OK\033[0m"
 	@make encadeada -s
 	@echo -e "\033[33mEncadeada  - OK\033[0m"
-	@make funcoes -s
-	@echo -e "\033[33mFuncoes    - OK\033[0m"
+	@make arquivos -s
+	@echo -e "\033[33marquivos    - OK\033[0m"
 	@make main -s
 	@echo -e "\033[33mMain       - OK\033[0m"
 	@echo -e "\033[32mExecutando...\n---------------------\033[0m"
@@ -16,11 +16,11 @@ sequencial:
 encadeada:
 	gcc -c ./src/encadeada.c -I ./include -o ./obj/encadeada.o 
 
-funcoes:
-	gcc -c ./src/funcoes.c -I ./include -o ./obj/funcoes.o 
+arquivos:
+	gcc -c ./src/arquivos.c -I ./include -o ./obj/arquivos.o 
 
 main:
-	gcc ./main.c ./obj/funcoes.o ./obj/encadeada.o ./obj/sequencial.o -I ./include -o ./output/main.exe 
+	gcc ./main.c ./obj/arquivos.o ./obj/encadeada.o ./obj/sequencial.o -I ./include -o ./output/main.exe 
 
 exe:
 	./output/main.exe
@@ -33,7 +33,7 @@ clear:
 	rm ./output/main.exe
 	rm ./obj/encadeada.o
 	rm ./obj/sequencial.o
-	rm ./obj/funcoes.o 
+	rm ./obj/arquivos.o 
 
 
 seq:
@@ -44,6 +44,6 @@ enc:
 	make encadeada
 	gcc ./main.c ./obj/encadeada.o -I ./include -o ./output/main.exe 
 
-func:
-	make funcoes
-	gcc ./main.c ./obj/funcoes.o -I ./include -o ./output/main.exe
+arq:
+	make arquivos
+	gcc ./main.c ./obj/arquivos.o -I ./include -o ./output/main.exe
