@@ -120,12 +120,17 @@ void adicionaNEncadeada(char nome[TAM], int rg, int n, Encadeada *lista)
     strcpy(novoRegistro->nome, nome);
     novoRegistro->rg = rg;
     int i = 0;
+    if(n < 0 || n > lista->tamanho)
+    {
+        printf("N invalido, posicao inexistente.\n");
+        return;
+    }
     if(n == 0 || lista->tamanho == 0)
     {
         adicionaInicioEncadeada(nome, rg, lista);
         return;
     }
-    if(n == lista->tamanho - 1)
+    if(n == lista->tamanho)
     {
         adicionaFinalEncadeada(nome, rg, lista);
         return;

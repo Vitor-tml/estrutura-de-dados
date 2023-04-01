@@ -28,7 +28,7 @@ void exibeSequencial(Sequencial *lista)
     int i;
     for (i = 0; i < lista->nElementos; i++)
     {
-        printf("%2d Nome: %-10s RG: %d\n", i, lista->registro[i].nome, lista->registro[i].rg);
+        printf("|%3d|Nome: %-10s|RG: %8d|\n", i, lista->registro[i].nome, lista->registro[i].rg);
         if(i % 50 == 0 && i != 0)
         {
             printf("%d/%d: Enter para continuar, outra tecla para sair.", i, lista->nElementos);
