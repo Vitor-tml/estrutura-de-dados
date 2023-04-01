@@ -8,6 +8,7 @@
 
 int main()
 {
+    /*
     Encadeada lista;
     FILE *arquivo = leArquivo();
     FILE *output;
@@ -15,7 +16,7 @@ int main()
     char nome[TAM] = "Vitor";
     int rg = 132957;
     criaArquivo();
-     
+        
     printf("Quantidade de linhas: %d\n", nLinhas);
 
     arquivoParaEncadeada(&lista, arquivo, nLinhas);
@@ -28,8 +29,18 @@ int main()
     exibeEncadeada(&lista);
     output = criaArquivo();
     encadeadaParaArquivo(&lista, output);
-    
+
     fclose(output);
     fclose(arquivo);
+    */
+
+    Sequencial lista;
+
+    iniciaSequencial(&lista, 10);
+    preencheSequencial(&lista);
+    exibeSequencial(&lista);
+
+    FILE *output = criaArquivo();
+    sequencialParaArquivo(&lista, output);
     return 0;
 }
