@@ -1,3 +1,4 @@
+#include <stdio.h> // Para o size_t
 #define TAM 15
 // Define os registros da Lista Sequencial como Nome e RG.
 typedef struct no_sequencial
@@ -26,5 +27,6 @@ void removeInicioSequencial(Sequencial *lista);
 void removeFinalSequencial(Sequencial *lista);
 void buscaSequencial(Sequencial *lista, int rg);
 void removeNSequencial(Sequencial *lista, int n);
+void arquivoParaSequencial(Sequencial *lista, FILE *arquivo, int nLinhas);
 
 

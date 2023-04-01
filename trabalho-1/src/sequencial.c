@@ -31,7 +31,7 @@ void exibeSequencial(Sequencial *lista)
         printf("%2d Nome: %-10s RG: %d\n", i, lista->registro[i].nome, lista->registro[i].rg);
         if(i % 50 == 0 && i != 0)
         {
-            printf("%d/%d Enter para continuar, outra tecla para sair.", i, lista->nElementos);
+            printf("%d/%d: Enter para continuar, outra tecla para sair.", i, lista->nElementos);
             if(getc(stdin) != '\n')
                 return;
             system(LIMPA);
@@ -216,4 +216,20 @@ void buscaSequencial(Sequencial *lista, int rg)
     }
 
     removeFinalSequencial(lista);
+}
+
+// Preenche a lista com os dados do arquivo
+void arquivoParaSequencial(Sequencial *lista, FILE *arquivo, int nLinhas)
+{
+    int i;
+    int rg;
+    char nome[TAM];
+    iniciaSequencial(lista, nLinhas);
+    
+    for(i = 0; i < nLinhas; i++)
+    {
+        fscanf(arquivo, "%[^,],%d\n", nome, &rg);
+        adicionaFinalSequencial(nome, rg, lista);
+    }
+
 }

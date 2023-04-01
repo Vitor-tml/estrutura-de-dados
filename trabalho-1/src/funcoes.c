@@ -39,17 +39,18 @@ int menu()
 int quantidadeDeLinhas(FILE *arquivo)
 { // Se pula linha antes do final do arquivo, mudar para i = 0
     int linhas = 0;
-    char c; 
-    if(arquivo == NULL)
+    char c;
+    if (arquivo == NULL)
     {
         printf("Arquivo Invalido.\n");
         return -1;
     }
 
-    while(fscanf(arquivo, "%c", &c) != EOF)
-        if(c == '\n')
+    while (fscanf(arquivo, "%c", &c) != EOF)
+        if (c == '\n') // Mais rápido
             linhas++;
-    
+    //(c == '\n')? linhas++: linhas;
+    rewind(arquivo); // volta para o inicio do arquivo
     return linhas;
 }
 
@@ -58,37 +59,38 @@ FILE *leArquivo()
 {
     FILE *arquivo;
     int i, op;
-    char nomes[8][17] ={"1) NomeRG10.txt\0",
-                        "2) NomeRG50.txt\0",
-                        "3) NomeRG100.txt\0",
-                        "4) NomeRG1K.txt\0",
-                        "5) NomeRG10K.txt\0",
-                        "6) NomeRG1M.txt\0",
-                        "7) NomeRG10M.txt\0",
-                        "8) Outro\0"};
-    char caminho[20] = "../\0";
+    char nomes[8][17] = {"1) NomeRG10.txt\0",
+                         "2) NomeRG50.txt\0",
+                         "3) NomeRG100.txt\0",
+                         "4) NomeRG1K.txt\0",
+                         "5) NomeRG10K.txt\0",
+                         "6) NomeRG1M.txt\0",
+                         "7) NomeRG10M.txt\0",
+                         "8) Outro\0"};
+    char caminho[20] = ".\\data\\\0";
+
     // Escolha de arquivo
     printf("Qual arquivo?\n");
-    for(i = 0; i < 8; i++)
+    for (i = 0; i < 8; i++)
         printf("%s\n", nomes[i]);
     scanf("%d", &op);
-    if( op < 1 || op > 8)
+    if (op < 1 || op > 8)
     {
         printf("Entrada invalida.\n");
         return NULL;
     }
     // Entrada de outro arquivo
-    if(op == 8)
+    if (op == 8)
     {
         printf("Qual o nome do arquivo?\n");
         scanf("%s", nomes[7]);
-
     }
+
     // Abertura de arquivo
     strcat(caminho, nomes[--op]);
-    // printf("Caminho = %s\n", caminho); // Testando se o caminho do arquivo está correto
+    //printf("Caminho = %s\n", caminho); // Testando se o caminho do arquivo está correto
     arquivo = fopen(caminho, "r");
-    if(arquivo == NULL)
+    if (arquivo == NULL)
     {
         printf("Arquivo Invalido.\n");
         return NULL;
