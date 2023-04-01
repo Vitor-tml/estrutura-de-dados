@@ -26,7 +26,7 @@ void exibeEncadeada(Encadeada *lista)
         printf("|%3d|Nome: %-10s|RG: %8d|\n", i, atual->nome, atual->rg);
         if(i % 50 == 0 && i != 0)
         {
-            printf("%d/%d Enter para continuar, outra tecla para sair.", i, lista->tamanho);
+            printf("%d/%d: Enter para continuar, outra tecla para sair.", i, lista->tamanho);
             if(getc(stdin) != '\n')
                 return;
             system(LIMPA);
@@ -234,4 +234,19 @@ void buscaEncadeada(Encadeada *lista, int rg)
     }
 
     removeFinalEncadeada(lista);
+}
+
+// Preenche a lista com os dados do arquivo
+void arquivoParaEncadeada(Encadeada *lista, FILE *arquivo, int nLinhas)
+{
+    int i;
+    char nome[TAM];
+    int rg;
+    iniciaEncadeada(lista);
+    
+    for(i = 0; i < nLinhas; i++)
+    {
+        fscanf(arquivo, "%[^,],%d\n", nome, &rg);
+        adicionaFinalEncadeada(nome, rg, lista);
+    }
 }

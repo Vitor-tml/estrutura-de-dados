@@ -231,5 +231,4 @@ void arquivoParaSequencial(Sequencial *lista, FILE *arquivo, int nLinhas)
         fscanf(arquivo, "%[^,],%d\n", nome, &rg);
         adicionaFinalSequencial(nome, rg, lista);
     }
-
 }
