@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "sequencial.h"
-
+#define TAM 15
 
 // Cria Lista Sequencial vazia com uma quantidade de registros máxima.
 void iniciaSequencial(Sequencial *lista, int nRegistros)
@@ -22,7 +22,7 @@ void exibeSequencial(Sequencial *lista)
 {
     int i;
     for (i = 0; i < lista->nElementos; i++)
-        printf("Nome: %-10s RG: %d\n", lista->registro[i].nome, lista->registro[i].rg);
+        printf("%2d Nome: %-10s RG: %d\n", i, lista->registro[i].nome, lista->registro[i].rg);
 }
 
 // Preenche todos os registros de uma Lista Sequencial.
@@ -53,6 +53,14 @@ int contagemSequencial(Sequencial *lista)
    return lista->nElementos; 
 }
 
+// Testa se tem espaço na lista sequencial, se não aumenta o tamanho da lista em 5 espaços
+void aumentaSequencial(Sequencial *lista)
+{
+    if(lista->nMax < lista->nElementos)
+        lista->registro = (Registro_Sequencial *) maloka(lista->registro, (lista->nMax+5) * sizeof(Registro_Sequencial));
+        lista->nMax += 5;
+}
+
 // Redimensiona um vetor para lista sequencial
 void *maloka(void *origem, size_t tamanho)
 {
@@ -67,53 +75,73 @@ void *maloka(void *origem, size_t tamanho)
 }
 
 // Adiciona ou cria um novo registro na lista.
-void adicionaFinalSequencial(char nome[15], int rg,  Sequencial *lista)
+void adicionaFinalSequencial(char nome[TAM], int rg,  Sequencial *lista)
 {
     Registro_Sequencial novoRegistro;
     strcpy(novoRegistro.nome, nome);
     novoRegistro.rg = rg;
 
-    if(lista->nMax < (lista->nElementos + 1))  // Se não tiver espaço.
-    {
-        lista->registro = (Registro_Sequencial *) maloka(lista->registro, (lista->nMax+5) * sizeof(Registro_Sequencial));
-        lista->nMax += 5;
-    }
+    aumentaSequencial(lista);
     
-    lista->registro[lista->nElementos++] = novoRegistro;
+    lista->registro[lista->nElementos] = novoRegistro;
+    lista->nElementos++;
 }
 
 // Adiciona registro no inicio da Lista Sequencial
-void adicionaInicioSequencial(char nome[15], int rg,  Sequencial *lista)
+void adicionaInicioSequencial(char nome[TAM], int rg,  Sequencial *lista)
 {
     Registro_Sequencial novoRegistro;
     strcpy(novoRegistro.nome, nome);
     novoRegistro.rg = rg;
     int i;
 
-    if(lista->nMax < (lista->nElementos + 1))  // Se não tiver espaço, aumenta 5 registros no tamanho da lista
-    {
-        lista->registro = (Registro_Sequencial *) maloka(lista->registro, (lista->nMax+5) * sizeof(Registro_Sequencial));
-        lista->nMax += 5;
-    }
+    aumentaSequencial(lista);
 
     // Desloca toda a lista 1 casa pra frente
-    for(i = lista->nElementos - 1; i > i; i--)
+    for(i = lista->nElementos; i > 0; i--)
     {
-        lista->registro[lista->nElementos] = lista->registro[lista->nElementos - 1];
+        lista->registro[i] = lista->registro[i - 1];
     }
 
     lista->registro[0] = novoRegistro;
+    lista->nElementos++;
 }
 
+// Adiciona um registro na posição N da lista sequencial
+void adicionaNSequencial(char nome[15], int rg, int n, Sequencial *lista)
+{
+    int i;
+    Registro_Sequencial novoRegistro;
+    strcpy(novoRegistro.nome, nome);
+    novoRegistro.rg = rg;
+    if(lista->nElementos + 1 < n)
+    {
+        printf("O elemento N nao existe.");
+        return;
+    }
+    else
+    {
+        if(n == 0)
+            adicionaInicioSequencial(nome, rg, lista);
+        else
+            if(n == lista->nElementos)
+                adicionaFinalSequencial(nome, rg, lista);
+            else
+                {
+                    aumentaSequencial(lista);
+                    for(i = lista->nElementos - 1; i >= n; i--) // Desloca toda a matrix, a partir de N, 1 registro pra frente
+                        lista->registro[i+1] = lista->registro[i];
+                    lista->registro[n] = novoRegistro;
+                    lista->nElementos++;
+                }
+    }
+
+
+}
 // Remove o primeiro registro da lista sequencial
 void removeInicioSequencial(Sequencial *lista)
 {
     // Testes de possibilidade da operação
-    if(lista->registro == NULL)
-    {
-        printf("Problema ao retirar do inicio da lista\n.");
-        return;
-    }
     if(lista->nElementos == 0)
     {
         printf("Lista vazia\n.");
@@ -121,7 +149,7 @@ void removeInicioSequencial(Sequencial *lista)
     }
     int i;
     lista->nElementos--;
-    for(i = 0; i < lista->nElementos; i ++)
+    for(i = 0; i < lista->nElementos; i ++) // Desloca todo o vetor 1 registro para trás
         lista->registro[i] = lista->registro[i+1];
 
 }
@@ -130,11 +158,6 @@ void removeInicioSequencial(Sequencial *lista)
 void removeFinalSequencial(Sequencial *lista)
 {
     // Testes de possibilidade da operação
-    if(lista->registro == NULL)
-    {
-        printf("Problema ao retirar do inicio da lista\n.");
-        return;
-    }
     if(lista->nElementos == 0)
     {
         printf("Lista vazia\n.");
@@ -142,4 +165,41 @@ void removeFinalSequencial(Sequencial *lista)
     }
     int i;
     lista->nElementos--;
+}
+
+// Remove registro N da lista sequencial
+void removeNSequencial(Sequencial *lista, int n)
+{
+    if(n < 0 || n >= lista->nElementos)
+    {
+        printf("Elemento %d nao pode ser retirado da lista, porque nao existe\n");
+        return;
+    }
+    int i;
+    lista->nElementos--;
+    for(i = n; i < lista->nElementos; i ++) // Desloca todo o vetor 1 registro para trás
+        lista->registro[i] = lista->registro[i+1];
+}
+
+// Busca destro de uma lista sequencial o registro com o rg passado
+void buscaSequencial(Sequencial *lista, int rg)
+{
+    int i = 0;
+    char sentinela[TAM] = "Sentinela";
+    
+    adicionaFinalSequencial(sentinela, rg, lista);
+
+    while(lista->registro[i++].rg != rg);
+
+    if(i == lista->nElementos)
+    {
+        printf("Nao existe esse CPF na lista.\n");
+    }
+    else
+    {
+        i--;
+        printf("Esse CPF e' o registro %2d da lista.\nNome: %-10s RG: %d\n", i, lista->registro[i].nome, lista->registro[i].rg);
+    }
+
+    removeFinalSequencial(lista);
 }

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "encadeada.h"
+#define TAM 15
 
 // Cira uma Lista Sequencial vazia.
 void iniciaEncadeada(Encadeada *lista)
@@ -18,7 +19,7 @@ void exibeEncadeada(Encadeada *lista)
     Registro_Encadeada *atual = lista->primeiro;
     for(i = 0; i < lista->tamanho; i++)
     {
-        printf("Nome: %-10s RG: %d\n", atual->nome, atual->rg);
+        printf("%2d Nome: %-10s RG: %d\n", i, atual->nome, atual->rg);
         atual = atual->proximo;
     }
 }
@@ -49,44 +50,84 @@ int contagemEncadeada(Encadeada *lista)
 }
 
 // Adiciona nó no início da lista encadeada
-void adicionaInicioEncadeada(char nome[15], int rg, Encadeada *lista)
+void adicionaInicioEncadeada(char nome[TAM], int rg, Encadeada *lista)
 {
     // Define o novo nó e seus valores
     Registro_Encadeada *novoRegistro = (Registro_Encadeada *) malloc(sizeof(Registro_Encadeada));
     strcpy(novoRegistro->nome, nome);
     novoRegistro->rg = rg;
-    novoRegistro->proximo = lista->primeiro;
     novoRegistro->anterior = NULL;
 
     // Atualiza inicio da Lista Encadeada
     if(lista->tamanho == 0) // Caso lista estiver vazia
     {
+        novoRegistro->proximo = NULL;
         lista->primeiro = novoRegistro;
-        lista->ultimo = novoRegistro;
     }
-    lista->primeiro->anterior = novoRegistro;
+    else
+    {
+        novoRegistro->proximo = lista->primeiro;
+        lista->primeiro->anterior = novoRegistro;
+    }
+
     lista->primeiro = novoRegistro;
     lista->tamanho++;
 }
 
 // Adiciona nó no Final da lista encadeada
-void adicionaFinalEncadeada(char nome[15], int rg, Encadeada *lista)
+void adicionaFinalEncadeada(char nome[TAM], int rg, Encadeada *lista)
 {
     // Define o novo nó e seus valores
     Registro_Encadeada *novoRegistro = (Registro_Encadeada *) malloc(sizeof(Registro_Encadeada));
     strcpy(novoRegistro->nome, nome);
     novoRegistro->rg = rg;
     novoRegistro->proximo = NULL;
-    novoRegistro->anterior = lista->ultimo;
+    
 
     // Atualiza inicio da Lista Encadeada
     if(lista->tamanho == 0) // Caso lista estiver varzia
     {
+        novoRegistro->anterior = NULL;
         lista->primeiro = novoRegistro;
-        lista->ultimo = novoRegistro;
     }
-    lista->ultimo->proximo = novoRegistro;
+    else
+    {
+        novoRegistro->anterior = lista->ultimo;
+        lista->ultimo->proximo = novoRegistro;
+    }
+
     lista->ultimo = novoRegistro;
+    lista->tamanho++;
+}
+
+// Adiciona um novo registro na posição N da lista encadeada
+void adicionaNEncadeada(char nome[TAM], int rg, int n, Encadeada *lista)
+{
+    Registro_Encadeada *novoRegistro = (Registro_Encadeada *) malloc(sizeof(Registro_Encadeada));
+    Registro_Encadeada *atual = lista->primeiro;
+    strcpy(novoRegistro->nome, nome);
+    novoRegistro->rg = rg;
+    int i = 0;
+    if(n == 0 || lista->tamanho == 0)
+    {
+        adicionaInicioEncadeada(nome, rg, lista);
+        return;
+    }
+    if(n == lista->tamanho - 1)
+    {
+        adicionaFinalEncadeada(nome, rg, lista);
+        return;
+    }
+    
+    while(i < n)
+    {
+        atual = atual->proximo;
+        i++;
+    }
+    
+    atual->anterior->proximo = novoRegistro;
+    novoRegistro->proximo = atual;
+    atual->anterior = novoRegistro;
     lista->tamanho++;
 }
 
@@ -120,4 +161,66 @@ void removeFinalEncadeada(Encadeada *lista)
     free(lista->ultimo); // Desaloca o espaço de memória do antigo primeiro
     lista->ultimo = novoUltimo;
     lista->tamanho--;
+}
+
+// Remove registro na posição N da lista encadeada
+void removeNEncadeada(Encadeada *lista, int n)
+{
+    if(n < 0 || n >= lista->tamanho)
+    {
+        printf("Registro %d nao pode ser retirado da lista encadeada, inexistente.\n");
+        return;
+    }
+    if(n == 0)
+    {
+        removeInicioEncadeada(lista);
+        return;
+    }
+    if(n == lista->tamanho - 1)
+    {
+        removeFinalEncadeada(lista);
+        return;
+    }
+
+    int i = 0;
+    Registro_Encadeada *proximo, *anterior, *atual = lista->primeiro;
+    while(i < n)
+    {
+        atual = atual->proximo;
+        i++;
+    }
+    
+    proximo = atual->proximo;
+    anterior = atual->anterior;
+    
+    anterior->proximo = proximo;
+    proximo->anterior = anterior;
+    lista->tamanho--;
+    free(atual);
+}
+
+// Retorna o nome e a localização de um RG na lista encadeada
+void buscaEncadeada(Encadeada *lista, int rg)
+{
+    int i = 0;
+    char sentinela[TAM] = "Sentinela";
+    Registro_Encadeada *atual = lista->primeiro;
+    
+    adicionaFinalEncadeada(sentinela, rg, lista);
+    while(atual->rg != rg)
+    {
+        atual = atual->proximo;
+        i++;
+    }
+
+    if(i == lista->tamanho)
+    {
+        printf("O registro nao existe na lista encadeada.\n");
+    }
+    else
+    {
+        printf("O CPF e' o registro %d da lista encadeada.\nNome: %-10s RG: %d\n", i, atual->nome, atual->rg);
+    }
+
+    removeFinalEncadeada(lista);
 }

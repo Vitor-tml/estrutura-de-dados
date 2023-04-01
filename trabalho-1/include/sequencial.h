@@ -1,7 +1,8 @@
+#define TAM TAM
 // Define os registros da Lista Sequencial como Nome e RG.
 typedef struct no_sequencial
 {
-    char nome[15];
+    char nome[TAM];
     int rg;
 } Registro_Sequencial;
 
@@ -16,9 +17,14 @@ typedef struct lista_sequencial
 void iniciaSequencial(Sequencial *lista, int nRegistros);
 void exibeSequencial(Sequencial *lista);
 void preencheSequencial(Sequencial *lista);
+void aumentaSequencial(Sequencial *lista);
 void *maloka(void *origem, size_t tamanho);
-void adicionaFinalSequencial(char nome[15], int rg,  Sequencial *lista);
-void adicionaInicioSequencial(char nome[15], int rg,  Sequencial *lista);
+void adicionaFinalSequencial(char nome[TAM], int rg,  Sequencial *lista);
+void adicionaInicioSequencial(char nome[TAM], int rg,  Sequencial *lista);
+void adicionaNSequencial(char nome[TAM], int rg, int n, Sequencial *lista);
 void removeInicioSequencial(Sequencial *lista);
 void removeFinalSequencial(Sequencial *lista);
+void buscaSequencial(Sequencial *lista, int rg);
+void removeNSequencial(Sequencial *lista, int n);
+
 

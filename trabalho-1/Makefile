@@ -41,14 +41,14 @@ clear:
 	rm ./obj/funcoes.o 
 
 
-testeseq:
+seq:
 	make sequencial
 	gcc ./main.c ./obj/sequencial.o -I ./include -o ./output/main.exe 
 
-testeenc:
+enc:
 	make encadeada
 	gcc ./main.c ./obj/encadeada.o -I ./include -o ./output/main.exe 
 
-testefunc:
+func:
 	make funcoes
 	gcc ./main.c ./obj/funcoes.o -I ./include -o ./output/main.exe

@@ -3,18 +3,19 @@
 #include <time.h>
 //#include "funcoes.h"
 #include "encadeada.h"
-
+#define TAM 15
 int main()
 {
     srand(time(NULL));
     Encadeada lista;
-    char nome[15] = "vitor";
+    char nome[TAM] = "Vitor";
     iniciaEncadeada(&lista);
-    printf("Sem\n-----------------\n");
-    preencheEncadeada(&lista, 10);
+    printf("--------------------------\nSem\n--------------------------\n");
+    preencheEncadeada(&lista, 5);
     exibeEncadeada(&lista);
-    removeFinalEncadeada(&lista);
-    printf("Com\n-----------------\n");
+    adicionaNEncadeada(nome, 1010, 4, &lista);
+    //removeNEncadeada(&lista, 4);
+    printf("--------------------------\nCom\n--------------------------\n");
     exibeEncadeada(&lista);
     return 0;
 }
