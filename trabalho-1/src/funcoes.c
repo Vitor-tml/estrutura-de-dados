@@ -1,6 +1,8 @@
 #include "funcoes.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#define TAM 15
 
 // Exibe menu inicial da aplicação
 int menu()
@@ -96,5 +98,28 @@ FILE *leArquivo()
         return NULL;
     }
 
+    return arquivo;
+}
+
+FILE *criaArquivo()
+{
+    FILE *arquivo;
+    char nomeArquivo[TAM];
+    char caminho[TAM] = "./data/\0";
+
+    printf("Qual vai ser o nome do arquivo?\n");
+    scanf("%s", nomeArquivo);
+    
+    strcat(nomeArquivo, ".txt");
+    strcat(caminho, nomeArquivo);
+    //printf("Caminho: %s\n", caminho);
+    arquivo = fopen(caminho, "w+");
+
+
+    if(arquivo == NULL)
+    {
+        printf("Nao foi possivel abrir o arquivo.\n");
+        exit(1);
+    }
     return arquivo;
 }

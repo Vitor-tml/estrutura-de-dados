@@ -232,3 +232,12 @@ void arquivoParaSequencial(Sequencial *lista, FILE *arquivo, int nLinhas)
         adicionaFinalSequencial(nome, rg, lista);
     }
 }
+
+// Preenche um arquivo com os dados da lista
+void sequencialParaArquivo(Sequencial *lista, FILE *arquivo)
+{
+    int i;
+
+    for(i = 0; i < lista->nElementos; i++)
+        fprintf(arquivo, "%s,%d\n", lista->registro[i].nome, lista->registro[i].rg);
+}

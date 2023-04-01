@@ -10,13 +10,26 @@ int main()
 {
     Encadeada lista;
     FILE *arquivo = leArquivo();
+    FILE *output;
     int nLinhas = quantidadeDeLinhas(arquivo);
-
+    char nome[TAM] = "Vitor";
+    int rg = 132957;
+    criaArquivo();
+     
     printf("Quantidade de linhas: %d\n", nLinhas);
 
     arquivoParaEncadeada(&lista, arquivo, nLinhas);
     printf("Tamanho: %d\n", lista.tamanho);
     exibeEncadeada(&lista);
-    free(arquivo);
+    adicionaInicioEncadeada(nome, rg, &lista);
+    printf("----------------------------------\n");
+    printf("Segunda\n");
+    printf("----------------------------------\n");
+    exibeEncadeada(&lista);
+    output = criaArquivo();
+    encadeadaParaArquivo(&lista, output);
+    
+    fclose(output);
+    fclose(arquivo);
     return 0;
 }

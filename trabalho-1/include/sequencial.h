@@ -28,5 +28,5 @@ void removeFinalSequencial(Sequencial *lista);
 void buscaSequencial(Sequencial *lista, int rg);
 void removeNSequencial(Sequencial *lista, int n);
 void arquivoParaSequencial(Sequencial *lista, FILE *arquivo, int nLinhas);
-
+void sequencialParaArquivo(Sequencial *lista, FILE *arquivo);
 

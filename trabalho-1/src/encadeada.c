@@ -33,6 +33,7 @@ void exibeEncadeada(Encadeada *lista)
         }
         atual = atual->proximo;
     }
+    
 }
 
 // Preenche todos os registros de uma lista Encadeada.
@@ -248,5 +249,17 @@ void arquivoParaEncadeada(Encadeada *lista, FILE *arquivo, int nLinhas)
     {
         fscanf(arquivo, "%[^,],%d\n", nome, &rg);
         adicionaFinalEncadeada(nome, rg, lista);
+    }
+}
+
+void encadeadaParaArquivo(Encadeada *lista, FILE *arquivo)
+{
+    int i;
+    Registro_Encadeada *atual = lista->primeiro;
+    
+    for(i = 0; i < lista->tamanho; i++)
+    {
+        fprintf(arquivo, "%s,%d\n", atual->nome, atual->rg);
+        atual = atual->proximo;
     }
 }

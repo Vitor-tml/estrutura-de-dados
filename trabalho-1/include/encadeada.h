@@ -28,3 +28,4 @@ void removeFinalEncadeada(Encadeada *lista);
 void removeNEncadeada(Encadeada *lista, int n);
 void buscaEncadeada(Encadeada *lista, int rg);
 void arquivoParaEncadeada(Encadeada *lista, FILE *arquivo, int nLinhas);
+void encadeadaParaArquivo(Encadeada *lista, FILE *arquivo);
