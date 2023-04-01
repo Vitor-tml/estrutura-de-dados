@@ -3,7 +3,11 @@
 #include <string.h>
 #include "encadeada.h"
 #define TAM 15
-
+#ifdef _WIN32
+#define LIMPA "cls"
+#else
+#define LIMPA "clear"
+#endif
 // Cira uma Lista Sequencial vazia.
 void iniciaEncadeada(Encadeada *lista)
 {
@@ -19,7 +23,14 @@ void exibeEncadeada(Encadeada *lista)
     Registro_Encadeada *atual = lista->primeiro;
     for(i = 0; i < lista->tamanho; i++)
     {
-        printf("%2d Nome: %-10s RG: %d\n", i, atual->nome, atual->rg);
+        printf("|%3d|Nome: %-10s|RG: %8d|\n", i, atual->nome, atual->rg);
+        if(i % 50 == 0 && i != 0)
+        {
+            printf("%d/%d Enter para continuar, outra tecla para sair.", i, lista->tamanho);
+            if(getc(stdin) != '\n')
+                return;
+            system(LIMPA);
+        }
         atual = atual->proximo;
     }
 }

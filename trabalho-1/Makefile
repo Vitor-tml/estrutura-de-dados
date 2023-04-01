@@ -1,18 +1,13 @@
 all:
 	@make sequencial -s
 	@echo -e "\033[33mSequencial - OK\033[0m"
-	@sleep 1
 	@make encadeada -s
 	@echo -e "\033[33mEncadeada  - OK\033[0m"
-	@sleep 1
 	@make funcoes -s
 	@echo -e "\033[33mFuncoes    - OK\033[0m"
-	@sleep 1
 	@make main -s
 	@echo -e "\033[33mMain       - OK\033[0m"
-	@sleep 1
 	@echo -e "\033[32mExecutando...\n---------------------\033[0m"
-	@sleep 1
 	@make exe -s
 
 sequencial:

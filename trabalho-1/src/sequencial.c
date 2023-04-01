@@ -3,6 +3,11 @@
 #include <string.h>
 #include "sequencial.h"
 #define TAM 15
+#ifdef _WIN32
+#define LIMPA "cls"
+#else
+#define LIMPA "clear"
+#endif
 
 // Cria Lista Sequencial vazia com uma quantidade de registros máxima.
 void iniciaSequencial(Sequencial *lista, int nRegistros)
@@ -22,7 +27,16 @@ void exibeSequencial(Sequencial *lista)
 {
     int i;
     for (i = 0; i < lista->nElementos; i++)
+    {
         printf("%2d Nome: %-10s RG: %d\n", i, lista->registro[i].nome, lista->registro[i].rg);
+        if(i % 50 == 0 && i != 0)
+        {
+            printf("%d/%d Enter para continuar, outra tecla para sair.", i, lista->nElementos);
+            if(getc(stdin) != '\n')
+                return;
+            system(LIMPA);
+        }
+    }
 }
 
 // Preenche todos os registros de uma Lista Sequencial.

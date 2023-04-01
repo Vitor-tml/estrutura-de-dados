@@ -1,4 +1,4 @@
-#define TAM TAM
+#define TAM 15
 // Define os registros da Lista Sequencial como Nome e RG.
 typedef struct no_sequencial
 {

@@ -38,7 +38,7 @@ int menu()
 // Retorna a quantidade de linhas de um arquivo
 int quantidadeDeLinhas(FILE *arquivo)
 { // Se pula linha antes do final do arquivo, mudar para i = 0
-    int i = 0;
+    int linhas = 0;
     char c; 
     if(arquivo == NULL)
     {
@@ -46,12 +46,11 @@ int quantidadeDeLinhas(FILE *arquivo)
         return -1;
     }
 
-    do{
-        c = getc(arquivo);
+    while(fscanf(arquivo, "%c", &c) != EOF)
         if(c == '\n')
-            i++;
-    }while(c != EOF);
-    return i;
+            linhas++;
+    
+    return linhas;
 }
 
 // Abre um arquivo e retorna um ponteiro para FILE
