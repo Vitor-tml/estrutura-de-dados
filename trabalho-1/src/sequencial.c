@@ -211,13 +211,15 @@ void buscaSequencial(Sequencial *lista, int rg)
 {
     int i = 0;
     char sentinela[TAM] = "Sentinela";
-    
+
     adicionaFinalSequencial(sentinela, rg, lista);
 
     while(lista->registro[i++].rg != rg)
         Cn++;
 
-    if(i == lista->nElementos)
+    removeFinalSequencial(lista);
+
+    if(i >= lista->nElementos)
     {
         printf("Nao existe esse CPF na lista.\n");
     }
@@ -227,7 +229,6 @@ void buscaSequencial(Sequencial *lista, int rg)
         printf("Esse CPF e' o registro %2d da lista.\nNome: %-10s RG: %d\n", i, lista->registro[i].nome, lista->registro[i].rg);
     }
     Cn++;
-    removeFinalSequencial(lista);
 }
 
 // Preenche a lista com os dados do arquivo
