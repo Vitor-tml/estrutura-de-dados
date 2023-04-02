@@ -36,7 +36,7 @@ FILE *leArquivo()
                          "6) NomeRG1M.txt\0",
                          "7) NomeRG10M.txt\0",
                          "8) Outro\0"};
-    char caminho[20] = ".\\data\\\0";
+    char caminho[20] = "./data/\0";
 
     // Escolha de arquivo
     printf("Qual arquivo?\n");

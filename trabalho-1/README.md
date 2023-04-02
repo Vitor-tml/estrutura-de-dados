@@ -25,7 +25,7 @@ Obs.: Usar busca sequencial.
 4. Entrada Manual.
 5. Método da lista sequencial
 6. Lista encadeada
-7. Método da lista encadeade
+7. Método da lista encadeada
 
 
 # Dúvidas

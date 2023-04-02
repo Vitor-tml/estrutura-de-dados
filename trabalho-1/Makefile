@@ -33,6 +33,10 @@ exe:
 rep:
 	mkdir ./output
 	mkdir ./obj
+	mkdir ./data
+
+rename:
+	
 	
 clear:
 	rm ./output/main.exe
