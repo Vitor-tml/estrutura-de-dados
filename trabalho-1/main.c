@@ -103,11 +103,13 @@ int main()
         case 4: // Ler arquivo
             arquivo = leArquivo();
             nLinhas = quantidadeDeLinhas(arquivo);
+            iniciaContagem();
             if (qualLista)
                 arquivoParaEncadeada(&encadeada, arquivo, nLinhas);
             else
                 arquivoParaSequencial(&sequencial, arquivo, nLinhas);
             fclose(arquivo);
+            terminaContagem();
             espera("Arquivo lido com sucesso.");
             break;
 
