@@ -4,6 +4,7 @@
 #include "arquivos.h"
 #include "sequencial.h"
 #include "encadeada.h"
+#include "performance.h"
 #define TAM 15
 #ifdef _WIN32
 #define LIMPA "cls"
@@ -11,11 +12,18 @@
 #define LIMPA "clear"
 #endif
 
+// Variáveis globais de performance
+int Mn;
+int Cn;
+clock_t inicio;
+clock_t fim;
+
+// Declaração de funçoes que usam as bibliotecas
 void inserirEncadeada(char nome[15], int rg, int posicao, Encadeada *lista);
 void inserirSequencial(char nome[15], int rg, int posicao, Sequencial *lista);
 void retirarEncadeada(Encadeada *lista, int posicao);
 void retirarSequencial(Sequencial *lista, int posicao);
-void espera();
+void espera(char mensagem[]);
 
 int main()
 {
@@ -59,28 +67,36 @@ int main()
             scanf("%d", &posicao);
             printf("Qual sera o novo registro? (Nome RG)\n");
             scanf("%s %d", nome, &rg);
+            iniciaContagem();
             if (qualLista)
                 inserirEncadeada(nome, rg, posicao, &encadeada);
             else
                 inserirSequencial(nome, rg, posicao, &sequencial);
+            terminaContagem();
+            espera("Adicionado com sucesso.\n");
             break;
 
         case 2: // Retirar
             printf("Onde retirar?\n 1) Inicio.\n 2) Fim.\n 3) Posicao N.\n");
             scanf("%d", &posicao);
+            iniciaContagem();
             if (qualLista)
                 retirarEncadeada(&encadeada, posicao);
             else
                 retirarSequencial(&sequencial, posicao);
+            terminaContagem();
+            espera("Adicionado com sucesso.\n");
             break;
 
-        case 3: // Pesquisar
-            printf("Qual o RG a ser procurado?");
+        case 3: // Procurar
+            printf("Qual o RG a ser procurado?\n");
             scanf("%d", &rg);
+            iniciaContagem();
             if (qualLista)
                 buscaEncadeada(&encadeada, rg);
             else
                 buscaSequencial(&sequencial, rg);
+            terminaContagem();
             espera("Busca efetuada.");
             break;
 
@@ -95,7 +111,7 @@ int main()
             espera("Arquivo lido com sucesso.");
             break;
 
-        case 5:
+        case 5: // Salva em arquivo
             arquivo = criaArquivo();
             if (qualLista)
                 encadeadaParaArquivo(&encadeada, arquivo);
@@ -122,6 +138,12 @@ int main()
             break;
         }
     } while (opcao != 7);
+
+    if(qualLista)
+        desalocaEncadeada(&encadeada);
+    else
+        desalocaSequencial(&sequencial);
+    return 0;
 }
 
 // Menu para inserir na lista sequencial
@@ -207,7 +229,7 @@ void retirarEncadeada(Encadeada *lista, int posicao)
     }
 }
 
-void espera(char mensagem[100])
+void espera(char mensagem[])
 {
     printf("%s\n", mensagem);
     printf("Qualquer tecla para continuar...\n");

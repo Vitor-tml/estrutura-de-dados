@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "sequencial.h"
+#include "performance.h"
 #define TAM 15
 #ifdef _WIN32
 #define LIMPA "cls"
@@ -72,7 +73,7 @@ void aumentaSequencial(Sequencial *lista)
 {
     if(lista->nMax < lista->nElementos)
         lista->registro = (Registro_Sequencial *) maloka(lista->registro, (lista->nMax+5) * sizeof(Registro_Sequencial));
-        lista->nMax += 5;
+        lista->nMax += 5; 
 }
 
 // Redimensiona um vetor para lista sequencial
@@ -115,6 +116,7 @@ void adicionaInicioSequencial(char nome[TAM], int rg,  Sequencial *lista)
     for(i = lista->nElementos; i > 0; i--)
     {
         lista->registro[i] = lista->registro[i - 1];
+        Mn++;
     }
 
     lista->registro[0] = novoRegistro;
@@ -144,7 +146,10 @@ void adicionaNSequencial(char nome[15], int rg, int n, Sequencial *lista)
                 {
                     aumentaSequencial(lista);
                     for(i = lista->nElementos - 1; i >= n; i--) // Desloca toda a matrix, a partir de N, 1 registro pra frente
+                    {
                         lista->registro[i+1] = lista->registro[i];
+                        Mn++;
+                    }
                     lista->registro[n] = novoRegistro;
                     lista->nElementos++;
                 }
@@ -164,7 +169,10 @@ void removeInicioSequencial(Sequencial *lista)
     int i;
     lista->nElementos--;
     for(i = 0; i < lista->nElementos; i ++) // Desloca todo o vetor 1 registro para trás
+    {
         lista->registro[i] = lista->registro[i+1];
+        Mn++;
+    }
 
 }
 
@@ -192,7 +200,10 @@ void removeNSequencial(Sequencial *lista, int n)
     int i;
     lista->nElementos--;
     for(i = n; i < lista->nElementos; i ++) // Desloca todo o vetor 1 registro para trás
+    {
         lista->registro[i] = lista->registro[i+1];
+        Mn++;
+    }
 }
 
 // Busca destro de uma lista sequencial o registro com o rg passado
@@ -203,7 +214,8 @@ void buscaSequencial(Sequencial *lista, int rg)
     
     adicionaFinalSequencial(sentinela, rg, lista);
 
-    while(lista->registro[i++].rg != rg);
+    while(lista->registro[i++].rg != rg)
+        Cn++;
 
     if(i == lista->nElementos)
     {
@@ -214,7 +226,7 @@ void buscaSequencial(Sequencial *lista, int rg)
         i--;
         printf("Esse CPF e' o registro %2d da lista.\nNome: %-10s RG: %d\n", i, lista->registro[i].nome, lista->registro[i].rg);
     }
-
+    Cn++;
     removeFinalSequencial(lista);
 }
 
@@ -242,4 +254,9 @@ void sequencialParaArquivo(Sequencial *lista, FILE *arquivo)
 
     for(i = 0; i < lista->nElementos; i++)
         fprintf(arquivo, "%s,%d\n", lista->registro[i].nome, lista->registro[i].rg);
+}
+
+void desalocaSequencial(Sequencial *lista)
+{
+    free(lista->registro);
 }

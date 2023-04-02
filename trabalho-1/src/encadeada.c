@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "encadeada.h"
+#include "performance.h"
 #define TAM 15
 #ifdef _WIN32
 #define LIMPA "cls"
@@ -95,7 +96,6 @@ void adicionaFinalEncadeada(char nome[TAM], int rg, Encadeada *lista)
     novoRegistro->rg = rg;
     novoRegistro->proximo = NULL;
     
-
     // Atualiza inicio da Lista Encadeada
     if(lista->tamanho == 0) // Caso lista estiver varzia
     {
@@ -139,6 +139,8 @@ void adicionaNEncadeada(char nome[TAM], int rg, int n, Encadeada *lista)
     while(i < n)
     {
         atual = atual->proximo;
+        Cn++; // If
+        Mn++; // Cópia
         i++;
     }
     
@@ -204,6 +206,8 @@ void removeNEncadeada(Encadeada *lista, int n)
     while(i < n)
     {
         atual = atual->proximo;
+        Cn++; // If
+        Mn++; // Cópia
         i++;
     }
     
@@ -227,10 +231,13 @@ void buscaEncadeada(Encadeada *lista, int rg)
     while(atual->rg != rg)
     {
         atual = atual->proximo;
+        Cn++; // If
+        Mn++; // Cópia
         i++;
     }
 
-    if(i == lista->tamanho)
+    removeFinalEncadeada(lista);
+    if(i >= lista->tamanho)
     {
         printf("O registro nao existe na lista encadeada.\n");
     }
@@ -239,7 +246,7 @@ void buscaEncadeada(Encadeada *lista, int rg)
         printf("O CPF e' o registro %d da lista encadeada.\nNome: %-10s RG: %d\n", i, atual->nome, atual->rg);
     }
 
-    removeFinalEncadeada(lista);
+    Cn++; // If de cima
 }
 
 // Preenche a lista com os dados do arquivo
@@ -255,16 +262,30 @@ void arquivoParaEncadeada(Encadeada *lista, FILE *arquivo, int nLinhas)
         fscanf(arquivo, "%[^,],%d\n", nome, &rg);
         adicionaFinalEncadeada(nome, rg, lista);
     }
+    
 }
 
 void encadeadaParaArquivo(Encadeada *lista, FILE *arquivo)
 {
     int i;
     Registro_Encadeada *atual = lista->primeiro;
-    
+
     for(i = 0; i < lista->tamanho; i++)
     {
         fprintf(arquivo, "%s,%d\n", atual->nome, atual->rg);
         atual = atual->proximo;
+    }
+}
+
+void desalocaEncadeada(Encadeada *lista)
+{
+    Registro_Encadeada *atual = lista->primeiro;
+    Registro_Encadeada *proxima;
+
+    while(atual != NULL)
+    {
+        proxima = atual->proximo;
+        free(atual);
+        atual = proxima;
     }
 }
