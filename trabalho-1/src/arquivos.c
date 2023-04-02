@@ -8,16 +8,16 @@
 int quantidadeDeLinhas(FILE *arquivo)
 { // Se pula linha antes do final do arquivo, mudar para i = 0
     int linhas = 0;
-    char c;
+    char c[30];
     if (arquivo == NULL)
     {
         printf("Arquivo Invalido.\n");
-        return -1;
+        exit(1);
     }
 
-    while (fscanf(arquivo, "%c", &c) != EOF)
-        if (c == '\n') // Mais rápido
-            linhas++;
+    while (fscanf(arquivo, "%s", c) != EOF)
+        linhas++;
+    
     //(c == '\n')? linhas++: linhas;
     rewind(arquivo); // volta para o inicio do arquivo
     return linhas;
