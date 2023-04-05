@@ -26,6 +26,7 @@ Obs.: Usar busca sequencial.
 5. Método da lista sequencial
 6. Lista encadeada
 7. Método da lista encadeada
+8. Salvar em arquivo
 
 
 # Dúvidas
