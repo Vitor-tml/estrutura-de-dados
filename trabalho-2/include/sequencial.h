@@ -1,16 +1,14 @@
+#ifndef __SEQUENCIAL__
+#define __SEQUENCIAL__
+
+#include "registro.h" // Define o Regristro da Lista
 #include <stdio.h> // Para o size_t
 #define TAM 15
-// Define os registros da Lista Sequencial como Nome e RG.
-typedef struct no_sequencial
-{
-    char nome[TAM];
-    int rg;
-} Registro_Sequencial;
 
-// Cabeçalho da Lista Sequencial.
+// Cabeçalho da Lista Encadeada.
 typedef struct lista_sequencial
 {
-    Registro_Sequencial *registro;
+    Registro *registro;
     int nElementos;
     int nMax;
 } Sequencial;
@@ -30,3 +28,6 @@ void buscaSequencial(Sequencial *lista, int rg);
 void arquivoParaSequencial(Sequencial *lista, FILE *arquivo, int nLinhas);
 void sequencialParaArquivo(Sequencial *lista, FILE *arquivo);
 void desalocaSequencial(Sequencial *lista);
+Registro *criaTabelaSequencial(Sequencial *lista);
+
+#endif

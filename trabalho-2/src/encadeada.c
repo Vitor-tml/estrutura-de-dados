@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "registro.h"
 #include "encadeada.h"
 #include "performance.h"
 #define TAM 15
@@ -21,7 +22,7 @@ void iniciaEncadeada(Encadeada *lista)
 void exibeEncadeada(Encadeada *lista)
 {
     int i;
-    Registro_Encadeada *atual = lista->primeiro;
+    Registro *atual = lista->primeiro;
     for(i = 0; i < lista->tamanho; i++)
     {
         printf("|%3d|Nome: %-10s|RG: %8d|\n", i, atual->nome, atual->rg);
@@ -66,7 +67,7 @@ int contagemEncadeada(Encadeada *lista)
 void adicionaInicioEncadeada(char nome[TAM], int rg, Encadeada *lista)
 {
     // Define o novo nó e seus valores
-    Registro_Encadeada *novoRegistro = (Registro_Encadeada *) malloc(sizeof(Registro_Encadeada));
+    Registro *novoRegistro = (Registro *) malloc(sizeof(Registro));
     strcpy(novoRegistro->nome, nome);
     novoRegistro->rg = rg;
     novoRegistro->anterior = NULL;
@@ -91,7 +92,7 @@ void adicionaInicioEncadeada(char nome[TAM], int rg, Encadeada *lista)
 void adicionaFinalEncadeada(char nome[TAM], int rg, Encadeada *lista)
 {
     // Define o novo nó e seus valores
-    Registro_Encadeada *novoRegistro = (Registro_Encadeada *) malloc(sizeof(Registro_Encadeada));
+    Registro *novoRegistro = (Registro *) malloc(sizeof(Registro));
     strcpy(novoRegistro->nome, nome);
     novoRegistro->rg = rg;
     novoRegistro->proximo = NULL;
@@ -115,8 +116,8 @@ void adicionaFinalEncadeada(char nome[TAM], int rg, Encadeada *lista)
 // Adiciona um novo registro na posição N da lista encadeada
 void adicionaNEncadeada(char nome[TAM], int rg, int n, Encadeada *lista)
 {
-    Registro_Encadeada *novoRegistro = (Registro_Encadeada *) malloc(sizeof(Registro_Encadeada));
-    Registro_Encadeada *atual = lista->primeiro;
+    Registro *novoRegistro = (Registro *) malloc(sizeof(Registro));
+    Registro *atual = lista->primeiro;
     strcpy(novoRegistro->nome, nome);
     novoRegistro->rg = rg;
     int i = 0;
@@ -158,7 +159,7 @@ void removeInicioEncadeada(Encadeada *lista)
         printf("Lista vazia.\n");
         return;
     }
-    Registro_Encadeada *novoPrimeiro = lista->primeiro->proximo;
+    Registro *novoPrimeiro = lista->primeiro->proximo;
 
     novoPrimeiro->anterior = lista->primeiro->anterior;
     free(lista->primeiro); // Desaloca o espaço de memória do antigo primeiro
@@ -174,7 +175,7 @@ void removeFinalEncadeada(Encadeada *lista)
         printf("Lista vazia.\n");
         return;
     }
-    Registro_Encadeada *novoUltimo = lista->ultimo->anterior;
+    Registro *novoUltimo = lista->ultimo->anterior;
 
     novoUltimo->proximo = NULL;
     free(lista->ultimo); // Desaloca o espaço de memória do antigo primeiro
@@ -202,7 +203,7 @@ void removeNEncadeada(Encadeada *lista, int n)
     }
 
     int i = 0;
-    Registro_Encadeada *proximo, *anterior, *atual = lista->primeiro;
+    Registro *proximo, *anterior, *atual = lista->primeiro;
     while(i < n)
     {
         atual = atual->proximo;
@@ -225,7 +226,7 @@ void buscaEncadeada(Encadeada *lista, int rg)
 {
     int i = 0;
     char sentinela[TAM] = "Sentinela";
-    Registro_Encadeada *atual = lista->primeiro;
+    Registro *atual = lista->primeiro;
     
     adicionaFinalEncadeada(sentinela, rg, lista);
     while(atual->rg != rg)
@@ -265,10 +266,11 @@ void arquivoParaEncadeada(Encadeada *lista, FILE *arquivo, int nLinhas)
     
 }
 
+// Salva a lista em um arquivo txt
 void encadeadaParaArquivo(Encadeada *lista, FILE *arquivo)
 {
     int i;
-    Registro_Encadeada *atual = lista->primeiro;
+    Registro *atual = lista->primeiro;
 
     for(i = 0; i < lista->tamanho; i++)
     {
@@ -277,10 +279,11 @@ void encadeadaParaArquivo(Encadeada *lista, FILE *arquivo)
     }
 }
 
+// Desaloca toda a memória usada pela lista
 void desalocaEncadeada(Encadeada *lista)
 {
-    Registro_Encadeada *atual = lista->primeiro;
-    Registro_Encadeada *proxima;
+    Registro *atual = lista->primeiro;
+    Registro *proxima;
 
     while(atual != NULL)
     {
@@ -288,4 +291,18 @@ void desalocaEncadeada(Encadeada *lista)
         free(atual);
         atual = proxima;
     }
+}
+
+// Cria tabela de endereços da Lista Encadeada
+Registro *criaTabelaEncadeada(Encadeada *lista)
+{
+    int i;
+    Registro *tabela = (Registro*) malloc(sizeof(Registro) * lista->tamanho);
+    Registro *atual = lista->primeiro;
+    for(i = 0; i < lista->tamanho; i++)
+    {
+        tabela[i] = *atual;
+        atual = atual->proximo;
+    }
+    return tabela;
 }

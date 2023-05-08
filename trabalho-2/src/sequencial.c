@@ -13,7 +13,7 @@
 // Cria Lista Sequencial vazia com uma quantidade de registros máxima.
 void iniciaSequencial(Sequencial *lista, int nRegistros)
 {
-    lista->registro = (Registro_Sequencial *) malloc(nRegistros * sizeof(Registro_Sequencial));
+    lista->registro = (Registro *) malloc(nRegistros * sizeof(Registro));
     if (lista->registro == NULL)
     {
         printf("Problema ao iniciar Lista Sequencial.\n");
@@ -59,6 +59,8 @@ void preencheSequencial(Sequencial *lista)
     {
         strcpy(lista->registro[i].nome, nome[rand() % 10]);
         lista->registro[i].rg = rand() % 100000000;
+        lista->registro[i].proximo = NULL;
+        lista->registro[i].anterior = NULL;
     }
 }
 
@@ -72,7 +74,7 @@ int contagemSequencial(Sequencial *lista)
 void aumentaSequencial(Sequencial *lista)
 {
     if(lista->nMax < lista->nElementos)
-        lista->registro = (Registro_Sequencial *) maloka(lista->registro, (lista->nMax+5) * sizeof(Registro_Sequencial));
+        lista->registro = (Registro *) maloka(lista->registro, (lista->nMax+5) * sizeof(Registro));
         lista->nMax += 5; 
 }
 
@@ -92,7 +94,7 @@ void *maloka(void *origem, size_t tamanho)
 // Adiciona ou cria um novo registro na lista.
 void adicionaFinalSequencial(char nome[TAM], int rg,  Sequencial *lista)
 {
-    Registro_Sequencial novoRegistro;
+    Registro novoRegistro;
     strcpy(novoRegistro.nome, nome);
     novoRegistro.rg = rg;
 
@@ -105,7 +107,7 @@ void adicionaFinalSequencial(char nome[TAM], int rg,  Sequencial *lista)
 // Adiciona registro no inicio da Lista Sequencial
 void adicionaInicioSequencial(char nome[TAM], int rg,  Sequencial *lista)
 {
-    Registro_Sequencial novoRegistro;
+    Registro novoRegistro;
     strcpy(novoRegistro.nome, nome);
     novoRegistro.rg = rg;
     int i;
@@ -127,7 +129,7 @@ void adicionaInicioSequencial(char nome[TAM], int rg,  Sequencial *lista)
 void adicionaNSequencial(char nome[15], int rg, int n, Sequencial *lista)
 {
     int i;
-    Registro_Sequencial novoRegistro;
+    Registro novoRegistro;
     strcpy(novoRegistro.nome, nome);
     novoRegistro.rg = rg;
     if(lista->nElementos + 1 < n)
@@ -257,7 +259,18 @@ void sequencialParaArquivo(Sequencial *lista, FILE *arquivo)
         fprintf(arquivo, "%s,%d\n", lista->registro[i].nome, lista->registro[i].rg);
 }
 
+// Desaloca toda a memória alocada para a Lista Sequencial
 void desalocaSequencial(Sequencial *lista)
 {
     free(lista->registro);
+}
+
+// Cria tabela de endereços da Lista Sequencial
+Registro *criaTabelaSequencial(Sequencial *lista)
+{
+    int i;
+    Registro *tabela = (Registro*) malloc(sizeof(Registro) * lista->nElementos);
+    for(i = 0; i < lista->nElementos; i++)
+        tabela[i] = lista->registro[i];
+    return tabela;
 }

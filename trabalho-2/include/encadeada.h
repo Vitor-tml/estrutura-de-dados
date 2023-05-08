@@ -1,18 +1,14 @@
-#define TAM 15
-// Define o nó da Lista Encadeada.
-typedef struct no_encadeada
-{
-    struct no_encadeada *anterior;
-    char nome[15];
-    int rg;
-    struct no_encadeada *proximo;
-}Registro_Encadeada;
+#ifndef __ENCADEADA__
+#define __ENCADEADA__
 
-// Cabeçalho da Lista Encadeada.
+#include "registro.h" // Define o Regristro da Lista
+#define TAM 15
+
+// Cabeçalho da Lista Sequencial.
 typedef struct lista_encadeada
 {
-    Registro_Encadeada *primeiro;
-    Registro_Encadeada *ultimo;
+    Registro *primeiro;
+    Registro *ultimo;
     int tamanho;
 }Encadeada;
 
@@ -30,3 +26,5 @@ void buscaEncadeada(Encadeada *lista, int rg);
 void arquivoParaEncadeada(Encadeada *lista, FILE *arquivo, int nLinhas);
 void encadeadaParaArquivo(Encadeada *lista, FILE *arquivo);
 void desalocaEncadeada(Encadeada *lista_encadeada);
+Registro *criaTabelaEncadeada(Encadeada *lista);
+#endif
