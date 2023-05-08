@@ -1,6 +1,8 @@
 #ifndef ORDENACAO_H
 #define ORDENACAO_H
+#include "registro.h"
 
-void selectionSort();
+void selectionSort(Registro **tabela, int tamanho);
+void imprimeTabela(Registro **tabela, int tamanho);
 
 #endif

@@ -1,6 +1,7 @@
 #ifndef __ENCADEADA__
 #define __ENCADEADA__
 
+#include <stdio.h>
 #include "registro.h" // Define o Regristro da Lista
 #define TAM 15
 
@@ -26,5 +27,5 @@ void buscaEncadeada(Encadeada *lista, int rg);
 void arquivoParaEncadeada(Encadeada *lista, FILE *arquivo, int nLinhas);
 void encadeadaParaArquivo(Encadeada *lista, FILE *arquivo);
 void desalocaEncadeada(Encadeada *lista_encadeada);
-Registro *criaTabelaEncadeada(Encadeada *lista);
+Registro **criaTabelaEncadeada(Encadeada *lista);
 #endif

@@ -294,14 +294,14 @@ void desalocaEncadeada(Encadeada *lista)
 }
 
 // Cria tabela de endereços da Lista Encadeada
-Registro *criaTabelaEncadeada(Encadeada *lista)
+Registro **criaTabelaEncadeada(Encadeada *lista)
 {
     int i;
-    Registro *tabela = (Registro*) malloc(sizeof(Registro) * lista->tamanho);
+    Registro **tabela = (Registro**) malloc(sizeof(Registro *) * lista->tamanho);
     Registro *atual = lista->primeiro;
     for(i = 0; i < lista->tamanho; i++)
     {
-        tabela[i] = *atual;
+        tabela[i] = atual;
         atual = atual->proximo;
     }
     return tabela;

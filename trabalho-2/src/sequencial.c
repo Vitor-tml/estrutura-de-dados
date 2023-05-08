@@ -266,11 +266,11 @@ void desalocaSequencial(Sequencial *lista)
 }
 
 // Cria tabela de endereços da Lista Sequencial
-Registro *criaTabelaSequencial(Sequencial *lista)
+Registro **criaTabelaSequencial(Sequencial *lista)
 {
     int i;
-    Registro *tabela = (Registro*) malloc(sizeof(Registro) * lista->nElementos);
+    Registro **tabela = (Registro**) malloc(sizeof(Registro *) * lista->nElementos);
     for(i = 0; i < lista->nElementos; i++)
-        tabela[i] = lista->registro[i];
+        tabela[i] = &lista->registro[i];
     return tabela;
 }

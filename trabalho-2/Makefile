@@ -7,6 +7,8 @@ all:
 	@echo -e "\033[33mEncadeada  - OK\033[0m"
 	@make arquivos -s
 	@echo -e "\033[33mArquivos    - OK\033[0m"
+	@make ordenacao -s
+	@echo -e "\033[33mOrdenacao    - OK\033[0m"
 	@make main -s
 	@echo -e "\033[33mMain       - OK\033[0m"
 	@echo -e "\033[32mExecutando...\n---------------------\033[0m"
@@ -24,8 +26,11 @@ arquivos:
 performance:
 	gcc -c ./src/performance.c -I ./include -o ./obj/performance.o
 
+ordenacao:
+	gcc -c ./src/ordenacao.c -I ./include -o ./obj/ordenacao.o
+
 main:
-	gcc ./main.c ./obj/arquivos.o ./obj/encadeada.o ./obj/sequencial.o ./obj/performance.o -I ./include -o ./output/main.exe 
+	gcc ./main.c ./obj/arquivos.o ./obj/encadeada.o ./obj/sequencial.o ./obj/performance.o ./obj/ordenacao.o -I ./include -o ./output/main.exe 
 
 exe:
 	./output/main.exe

@@ -5,6 +5,7 @@
 #include "sequencial.h"
 #include "encadeada.h"
 #include "performance.h"
+#include "ordenacao.h"
 #define TAM 15
 #ifdef _WIN32
 #define LIMPA "cls"
@@ -26,6 +27,24 @@ void retirarSequencial(Sequencial *lista, int posicao);
 void espera(char mensagem[]);
 
 int main()
+{
+    Encadeada lista;
+    //Encadeada lista;
+    Registro **tabela;
+    iniciaEncadeada(&lista);
+    preencheEncadeada(&lista, 10);
+    // printf("LISTA GERADA: \n");
+    // exibeEncadeada(&lista);
+    tabela = criaTabelaEncadeada(&lista);
+    printf("TABELA GERADA: \n");
+    imprimeTabela(tabela, lista.tamanho);
+    selectionSort(tabela, lista.tamanho);
+    printf("TABELA ORDENADA: \n");
+    imprimeTabela(tabela, lista.tamanho);
+    
+}
+
+int maina()
 {
     int qualLista, opcao, posicao, nLinhas;
     char nome[15];
