@@ -38,7 +38,7 @@ int main()
     tabela = criaTabelaEncadeada(&lista);
     printf("TABELA GERADA: \n");
     imprimeTabela(tabela, lista.tamanho);
-    selectionSort(tabela, lista.tamanho);
+    insertionSort(tabela, lista.tamanho);
     printf("TABELA ORDENADA: \n");
     imprimeTabela(tabela, lista.tamanho);
     
