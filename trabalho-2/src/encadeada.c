@@ -188,7 +188,7 @@ void removeNEncadeada(Encadeada *lista, int n)
 {
     if(n < 0 || n >= lista->tamanho)
     {
-        printf("Registro %d nao pode ser retirado da lista encadeada, inexistente.\n");
+        printf("Registro %d nao pode ser retirado da lista encadeada, inexistente.\n", n);
         return;
     }
     if(n == 0)

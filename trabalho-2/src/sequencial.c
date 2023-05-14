@@ -196,7 +196,7 @@ void removeNSequencial(Sequencial *lista, int n)
 {
     if(n < 0 || n >= lista->nElementos)
     {
-        printf("Elemento %d nao pode ser retirado da lista, porque nao existe\n");
+        printf("Elemento %d nao pode ser retirado da lista, porque nao existe\n", n);
         return;
     }
     int i;

@@ -27,12 +27,12 @@ void insertionSort(Registro **tabela, int tamanho)
     int i, j;
     Registro *aux;
 
-    for(i = 1; i < tamanho - 1; i ++)
+    for(i = 1; i < tamanho; i ++)
     {
         aux = tabela[i];
         j = i - 1;
 
-        while(j >= 0 && aux->rg < (*tabela[i]).rg)
+        while(j >= 0 && aux->rg < (*tabela[j]).rg)
         {
             tabela[j+1] = tabela[j];
             j--;
