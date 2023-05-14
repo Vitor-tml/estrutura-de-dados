@@ -21,7 +21,7 @@ void selectionSort(Registro **tabela, int tamanho)
         }
 }
 
-//
+// Algoritmo que ordena o vetor N por N
 void insertionSort(Registro **tabela, int tamanho)
 {
     int i, j;
@@ -41,6 +41,51 @@ void insertionSort(Registro **tabela, int tamanho)
     }
 }
 
+// Algoritmo que ordena colocando empurrando o maior para frente posição por posição
+void bubbleSort(Registro **tabela, int tamanho)
+{
+    int i, j;
+    Registro *aux;
+    for(j = 0; j < tamanho - 1; j++)
+        for(i = 0; i < tamanho - j - 1; i++)
+        {
+            aux = tabela[i];
+            if((*tabela[i]).rg > (*tabela[i+1]).rg)
+            {
+                aux = tabela[i];
+                tabela[i] = tabela[i+1];
+                tabela[i+1] = aux;
+            }
+        }
+}
+
+// InsertionSort com um frufru a mais
+void shellSort(Registro **tabela, int tamanho)
+{
+    int i, j;
+    Registro *aux;
+
+    int h = 1;
+    while(h < tamanho)
+        h = 3 * h + 1;
+
+    while(h > 0)
+    {
+        h = (h - 1)/3;
+        for(i = h; i < tamanho; i++)
+        {
+            aux = tabela[i];
+            j = i;
+
+            while(j >= h && aux->rg < (*tabela[j - h]).rg)
+            {
+                tabela[j] = tabela[j - h];
+                j-=h;
+            }
+            tabela[j] = aux;
+        }
+    }
+}
 
 void imprimeTabela(Registro **tabela, int tamanho)
 {
