@@ -40,6 +40,11 @@ rep:
 	mkdir ./obj
 	mkdir ./data
 
+data:
+	cd data
+	wget https://pessoal.dainf.ct.utfpr.edu.br/maurofonseca/lib/exe/fetch.php?media=cursos:if63c:arquivocomprimidonomerg.zip
+	unzip fetch.php\?media\=cursos\:if63c\:arquivocomprimidonomerg.zip
+
 rename:
 	mv ./data/NomeRG1K.txt "./data/4) NomeRG1K.txt"
 	mv ./data/NomeRG1M.txt "./data/6) NomeRG1M.txt"

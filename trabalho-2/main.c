@@ -28,6 +28,7 @@ void espera(char mensagem[]);
 
 int main()
 {
+    srand(time(NULL));
     Encadeada lista;
     //Encadeada lista;
     Registro **tabela;
@@ -39,7 +40,7 @@ int main()
     printf("TABELA GERADA: \n");
     imprimeTabela(tabela, lista.tamanho);
     printf("Tamanho da lista: %d\n", lista.tamanho);
-    mergeSort(tabela, 0, lista.tamanho - 1);
+    quickSort(tabela, 0, lista.tamanho - 1);
     printf("TABELA ORDENADA: \n");
     imprimeTabela(tabela, lista.tamanho);
     

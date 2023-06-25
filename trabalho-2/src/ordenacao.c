@@ -89,7 +89,48 @@ void shellSort(Registro **tabela, int tamanho)
     }
 }
 
-// Divide o vetor 2 vezes recursivamente até ser apenas uma célula, depois ordena cada vetor menor entre si
+// Seleciona um pivo recursivamente e organiza o vetor por maior de um lado e menor de outro do pivo
+void quickSort(Registro **tabela, int inicio, int fim)
+{
+    int pivo;
+    if(inicio < fim)
+    {
+        pivo = particiona(tabela, inicio, fim);
+        quickSort(tabela, inicio, pivo - 1);
+        quickSort(tabela, pivo + 1, fim);
+    }
+}
+
+int particiona(Registro **tabela, int inicio, int fim)
+{
+    int maior, menor;
+    Registro *pivo, *aux;
+
+    maior = fim;
+    menor = inicio;
+    pivo = tabela[inicio];
+
+    while(menor < maior)
+    {
+        printf("Menor = %d Maior = %d Pivo = %d\n", menor, maior, inicio);
+        while((*tabela[menor]).rg <= pivo->rg)
+            menor++;
+        while((*tabela[maior]).rg > pivo->rg)
+            maior--;
+        
+        if(menor < maior)
+        {
+            aux = tabela[menor];
+            tabela[menor] = tabela[maior];
+            tabela[maior] = aux;
+        }
+    }
+    tabela[inicio] = tabela[menor];
+    tabela[menor] = pivo;
+    return menor;
+}
+
+// Divide o vetor em 2 recursivamente até ser apenas uma célula, depois ordena cada vetor menor entre si
 void mergeSort(Registro **tabela, int inicio, int fim) 
 {
     int meio;
@@ -101,6 +142,7 @@ void mergeSort(Registro **tabela, int inicio, int fim)
         merge(tabela, inicio, meio, fim);
     }
 }
+
 
 // Junta dois vetores ordenadamente
 void merge(Registro **tabela, int inicio, int meio, int fim) 
