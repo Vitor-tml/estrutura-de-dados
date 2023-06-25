@@ -274,3 +274,14 @@ Registro **criaTabelaSequencial(Sequencial *lista)
         tabela[i] = &lista->registro[i];
     return tabela;
 }
+
+void tabelaParaSequencial(Registro **tabela, Sequencial *lista)
+{
+    int i;
+    Registro *aux = (Registro *) malloc(lista->nMax * sizeof(Registro));
+    for(i = 0; i < lista->nElementos; i++)
+        aux[i] = (*tabela)[i];
+    for(i = 0; i < lista->nElementos; i++)
+        lista->registro[i] = aux[i];
+    free(aux);
+}

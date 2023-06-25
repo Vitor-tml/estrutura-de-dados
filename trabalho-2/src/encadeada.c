@@ -306,3 +306,14 @@ Registro **criaTabelaEncadeada(Encadeada *lista)
     }
     return tabela;
 }
+
+// Terminar de tabela para encadeada
+void tabelaParaEncadeada(Encadeada *lista, Registro **tabela)
+{
+    int i;
+    Registro *atual = lista->primeiro;
+    for(i = 0; i < lista->tamanho - i; i++)
+    {
+        atual = (*lista)[i];
+    }
+}

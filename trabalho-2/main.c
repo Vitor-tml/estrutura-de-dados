@@ -53,6 +53,7 @@ int maina()
     int rg;
     Encadeada encadeada;
     Sequencial sequencial;
+    Registro **tabela;
     FILE *arquivo;
     // Escolher entre sequencial e encadeada
     printf("Qual implementacao vai ser usada?\n0) Sequencial.\n1) Encadeada.\n");
@@ -78,7 +79,8 @@ int maina()
         printf("4) Ler arquivo.\n");
         printf("5) Imprimir em arquivo.\n");
         printf("6) Imprimir na tela.\n");
-        printf("7) Sair.\n");
+        printf("7) Ordenar.\n");
+        printf("8) Sair.\n");
         scanf("%d", &opcao);
 
         switch (opcao)
@@ -151,8 +153,17 @@ int maina()
                 exibeSequencial(&sequencial);
             espera("Fim da lista.");
             break;
+        
+        case 7: // Escolher ordenação
+            if(qualLista)
+                tabela = criaTabelaEncadeada(&encadeada);
+            else
+                tabela = criaTabelaSequencial(&sequencial);
+            
 
-        case 7:
+            break;
+
+        case 8: // Saída
             printf("Saindo...\n");
             break;
 
@@ -252,6 +263,49 @@ void retirarEncadeada(Encadeada *lista, int posicao)
     }
 }
 
+void ordenacao(Encadeada **tabela, int tamanho)
+{
+    int escolha;
+    printf("Qual ordenação?");
+    printf("1)Selection Sort\n");
+    printf("2)Insertion Sort\n");
+    printf("3)Bubble Sort\n");
+    printf("4)Shell Sort\n");
+    printf("5)Quick Sort\n");
+    printf("6)Merge Sort\n");
+    scanf("%d", &escolha);
+
+    switch(escolha)
+    {
+        case 1:
+            selectionSort(tabela,tamanho);
+            break;
+        
+        case 2:
+            insertionSort(tabela, tamanho);
+            break;
+        
+        case 3:
+            bubbleSort(tabela, tamanho);
+            break;
+
+        case 4:
+            shellSort(tabela, tamanho);
+            break;
+
+        case 5:
+            quickSort(tabela, 0, tamanho - 1);
+            break;
+
+        case 6:
+            mergeSort(tabela, 0, tamanho - 1);
+            break;
+
+        default:
+            printf("Escolha invalida!\n");
+            break;
+    }
+}
 void espera(char mensagem[])
 {
     printf("%s\n", mensagem);
