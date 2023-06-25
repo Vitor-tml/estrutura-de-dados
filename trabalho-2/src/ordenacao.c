@@ -92,42 +92,39 @@ void shellSort(Registro **tabela, int tamanho)
 // Seleciona um pivo recursivamente e organiza o vetor por maior de um lado e menor de outro do pivo
 void quickSort(Registro **tabela, int inicio, int fim)
 {
-    int pivo;
-    if(inicio < fim)
+    if (inicio < fim)
     {
-        pivo = particiona(tabela, inicio, fim);
-        quickSort(tabela, inicio, pivo - 1);
+        int pivo = particiona(tabela, inicio, fim);
+        quickSort(tabela, inicio, pivo);
         quickSort(tabela, pivo + 1, fim);
     }
 }
 
+// Faz as comparações e trocas da parte interna do algoritmo
 int particiona(Registro **tabela, int inicio, int fim)
 {
-    int maior, menor;
-    Registro *pivo, *aux;
+    Registro *pivo = tabela[inicio];
+    int i = inicio;
+    int j = fim;
 
-    maior = fim;
-    menor = inicio;
-    pivo = tabela[inicio];
-
-    while(menor < maior)
+    while (1)
     {
-        printf("Menor = %d Maior = %d Pivo = %d\n", menor, maior, inicio);
-        while((*tabela[menor]).rg <= pivo->rg)
-            menor++;
-        while((*tabela[maior]).rg > pivo->rg)
-            maior--;
-        
-        if(menor < maior)
-        {
-            aux = tabela[menor];
-            tabela[menor] = tabela[maior];
-            tabela[maior] = aux;
-        }
+        while (tabela[i]->rg < pivo->rg)
+            i++;
+
+        while (tabela[j]->rg > pivo->rg)
+            j--;
+
+        if (i >= j)
+            return j;
+
+        Registro *aux = tabela[i];
+        tabela[i] = tabela[j];
+        tabela[j] = aux;
+
+        i++;
+        j--;
     }
-    tabela[inicio] = tabela[menor];
-    tabela[menor] = pivo;
-    return menor;
 }
 
 // Divide o vetor em 2 recursivamente até ser apenas uma célula, depois ordena cada vetor menor entre si
