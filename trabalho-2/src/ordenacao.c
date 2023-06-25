@@ -94,7 +94,7 @@ void mergeSort(Registro **tabela, int inicio, int fim)
 {
     int meio;
     if (inicio < fim)
-    {  
+    {
         meio = floor((inicio + fim) / 2);
         mergeSort(tabela, inicio, meio);
         mergeSort(tabela, meio + 1, fim);
@@ -136,10 +136,7 @@ void merge(Registro **tabela, int inicio, int meio, int fim)
         else // Caso algum vetor acabou
         {
             if(!fimI) // Se o primeiro não acabou
-            {
-                printf("i = %d j = %d tamanho = %d aux[l]= %d\n", i, j, meio, l);
                 aux[l] = tabela[i++];
-            }
             else
                 aux[l] = tabela[j++];
         }

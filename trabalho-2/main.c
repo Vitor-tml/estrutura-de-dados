@@ -39,7 +39,7 @@ int main()
     printf("TABELA GERADA: \n");
     imprimeTabela(tabela, lista.tamanho);
     printf("Tamanho da lista: %d\n", lista.tamanho);
-    mergeSort(tabela, 0, lista.tamanho);
+    mergeSort(tabela, 0, lista.tamanho - 1);
     printf("TABELA ORDENADA: \n");
     imprimeTabela(tabela, lista.tamanho);
     
