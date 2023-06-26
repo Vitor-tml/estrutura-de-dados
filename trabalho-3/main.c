@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "cadeia.h"
+
 int main()
 {
     int loop, escolha;
     FILE *arquivo, *invertido;
+    
     do{
         printf("O que deseja fazer?\n");
         printf("1)Ler arquivo texto\n");
@@ -14,12 +17,14 @@ int main()
 
         switch (escolha)
         {
-        case 1:
+            case 1:
+                arquivo = leArquivo();
+                break;
             
-            break;
-        
-        default:
-            break;
+            case 2:
+
+            default:
+                break;
         }
 
         
