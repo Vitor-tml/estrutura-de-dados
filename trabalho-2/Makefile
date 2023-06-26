@@ -40,19 +40,18 @@ rep:
 	mkdir ./obj
 	mkdir ./data
 
-data:
-	cd data
+arquivo:
 	wget https://pessoal.dainf.ct.utfpr.edu.br/maurofonseca/lib/exe/fetch.php?media=cursos:if63c:arquivocomprimidonomerg.zip
 	unzip fetch.php\?media\=cursos\:if63c\:arquivocomprimidonomerg.zip
 
 rename:
-	mv ./data/NomeRG1K.txt "./data/4) NomeRG1K.txt"
-	mv ./data/NomeRG1M.txt "./data/6) NomeRG1M.txt"
-	mv ./data/NomeRG10K.txt "./data/5) NomeRG10K.txt"
-	mv ./data/NomeRG50.txt "./data/2) NomeRG50.txt"
-	mv ./data/NomeRG100M.txt "./data/7) NomeRG10M.txt"
-	mv ./data/NomeRG10.txt "./data/1) NomeRG10.txt"
-	mv ./data/NomeRG100.txt "./data/3) NomeRG100.txt"
+	mv NomeRG1K.txt "./data/4) NomeRG1K.txt"
+	mv NomeRG1M.txt "./data/6) NomeRG1M.txt"
+	mv NomeRG10K.txt "./data/5) NomeRG10K.txt"
+	mv NomeRG50.txt "./data/2) NomeRG50.txt"
+	mv NomeRG100M.txt "./data/7) NomeRG10M.txt"
+	mv NomeRG10.txt "./data/1) NomeRG10.txt"
+	mv NomeRG100.txt "./data/3) NomeRG100.txt"
 
 clear:
 	rm ./output/main.exe

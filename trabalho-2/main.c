@@ -30,7 +30,7 @@ void ordenacao(Registro **tabela, int tamanho);
 
 int main()
 {
-    int qualLista, opcao, posicao, nLinhas;
+    int qualLista, opcao, posicao, nLinhas, busca, tamanho;
     char nome[15];
     int rg;
     Encadeada encadeada;
@@ -96,12 +96,34 @@ int main()
         case 3: // Procurar
             printf("Qual o RG a ser procurado?\n");
             scanf("%d", &rg);
-            iniciaContagem();
-            if (qualLista)
-                buscaEncadeada(&encadeada, rg);
+            printf("Qual busca?\n1)Sequencial\n2)Binária\n");
+            scanf("%d", &busca);
+
+            if(busca == 1)
+            {
+                iniciaContagem();
+                if (qualLista)
+                    buscaEncadeada(&encadeada, rg);
+                else
+                    buscaSequencial(&sequencial, rg);
+                terminaContagem();
+            }
             else
-                buscaSequencial(&sequencial, rg);
-            terminaContagem();
+            {
+                if(qualLista)
+                {
+                    tamanho = encadeada.tamanho;
+                    tabela = criaTabelaEncadeada(&encadeada);
+                }
+                else
+                {
+                    tamanho = sequencial.nElementos;
+                    tabela = criaTabelaSequencial(&sequencial);
+                }
+                quickSort(tabela, 0, tamanho - 1);
+                busca = buscaBinaria(tabela, 0, tamanho, rg);
+                printf("|%3d|Nome: %-10s|RG: %8d|\n", busca, (*tabela[busca]).nome, (*tabela[busca]).rg);
+            }
             espera("Busca efetuada.");
             break;
 
@@ -140,12 +162,14 @@ int main()
             if(qualLista)
             {
                 tabela = criaTabelaEncadeada(&encadeada);
+                ordenacao(tabela, encadeada.tamanho);
                 tabelaParaEncadeada(&encadeada, tabela);
                 encadeada.ordenada = 1;
             }
             else
             {
                 tabela = criaTabelaSequencial(&sequencial);
+                ordenacao(tabela, sequencial.nElementos);
                 tabelaParaSequencial(&sequencial, tabela);
                 sequencial.ordenada = 1;
             }
@@ -159,7 +183,7 @@ int main()
             espera("Entrada Invalida.");
             break;
         }
-    } while (opcao != 7);
+    } while (opcao != 8);
 
     if(qualLista)
         desalocaEncadeada(&encadeada);

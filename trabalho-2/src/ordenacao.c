@@ -200,11 +200,7 @@ int buscaBinaria(Registro **tabela, int inicio, int fim, int chave)
         printf("Elemento nao encontrado!\n");
         exit(1);
     }
-    int i;
-    //for(i = 0; i < 10; i++)
-    //printf("%10d == %10d | Meio %d\n", chave, (*tabela[i]).rg, i);
-    //imprimeTabela(tabela, 10);
-    //getchar();
+    
     if((*tabela[meio]).rg == chave)
         return meio;
     else
