@@ -11,6 +11,7 @@ typedef struct lista_sequencial
     Registro *registro;
     int nElementos;
     int nMax;
+    int ordenada;
 } Sequencial;
 
 void iniciaSequencial(Sequencial *lista, int nRegistros);

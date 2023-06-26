@@ -11,6 +11,7 @@ typedef struct lista_encadeada
     Registro *primeiro;
     Registro *ultimo;
     int tamanho;
+    int ordenada;
 }Encadeada;
 
 void iniciaEncadeada(Encadeada *lista);

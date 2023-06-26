@@ -25,13 +25,17 @@ void inserirSequencial(char nome[15], int rg, int posicao, Sequencial *lista);
 void retirarEncadeada(Encadeada *lista, int posicao);
 void retirarSequencial(Sequencial *lista, int posicao);
 void espera(char mensagem[]);
+void ordenacao(Registro **tabela, int tamanho);
+
 
 int main()
 {
     srand(time(NULL));
     Sequencial lista;
+    int chave;
     //Encadeada lista;
     Registro **tabela;
+    Registro *busca;
     iniciaSequencial(&lista, 10);
     preencheSequencial(&lista);
     // printf("LISTA GERADA: \n");
@@ -39,15 +43,15 @@ int main()
     tabela = criaTabelaSequencial(&lista);
     printf("TABELA GERADA: \n");
     imprimeTabela(tabela, lista.nElementos);
-    printf("Tamanho da lista: %d\n", lista.nElementos);
     quickSort(tabela, 0, lista.nElementos - 1);
     printf("TABELA ORDENADA: \n");
     imprimeTabela(tabela, lista.nElementos);
-    printf("%daaaaaaaaaaaaaasdfasfas\n", lista.nMax);
-    tabelaParaSequencial(&lista, tabela);
-    printf("TABELA SALVE: \n");
-    exibeSequencial(&lista);
     
+    tabelaParaSequencial(&lista, tabela);
+    printf("Qual chave?\n");
+    scanf("%d", &chave);
+    //busca = buscaBinaria(tabela, 0, lista.nElementos - 1, chave);
+    printf("aaa");
 }
 
 int maina()
@@ -267,7 +271,8 @@ void retirarEncadeada(Encadeada *lista, int posicao)
     }
 }
 
-void ordenacao(Encadeada **tabela, int tamanho)
+// Interface de ordenação
+void ordenacao(Registro **tabela, int tamanho)
 {
     int escolha;
     printf("Qual ordenação?");
@@ -282,7 +287,7 @@ void ordenacao(Encadeada **tabela, int tamanho)
     switch(escolha)
     {
         case 1:
-            selectionSort(tabela,tamanho);
+            selectionSort(tabela, tamanho);
             break;
         
         case 2:

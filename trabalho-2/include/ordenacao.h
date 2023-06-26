@@ -11,5 +11,6 @@ int particiona(Registro **tabela, int inicio, int fim);
 void mergeSort(Registro **tabela, int inicio, int fim);
 void merge(Registro **, int inicio, int meio, int fim);
 void imprimeTabela(Registro **tabela, int tamanho);
+Registro *buscaBinaria(Registro** tabela, int tamanho, int chave);
 
 #endif

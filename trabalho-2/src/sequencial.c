@@ -21,6 +21,7 @@ void iniciaSequencial(Sequencial *lista, int nRegistros)
     }
     lista->nMax = nRegistros;
     lista->nElementos = 0;
+    lista->ordenada = 0;
 }
 
 // Imprime na tela todos os elementos válidos da Lista Sequencial.
@@ -43,6 +44,7 @@ void exibeSequencial(Sequencial *lista)
 // Preenche todos os registros de uma Lista Sequencial.
 void preencheSequencial(Sequencial *lista)
 {
+    lista->ordenada = 0;
     char nome[10][10] = {"Ana",
                          "Beatriz",
                          "Caua",
@@ -94,6 +96,7 @@ void *maloka(void *origem, size_t tamanho)
 // Adiciona ou cria um novo registro na lista.
 void adicionaFinalSequencial(char nome[TAM], int rg,  Sequencial *lista)
 {
+    lista->ordenada = 0;
     Registro novoRegistro;
     strcpy(novoRegistro.nome, nome);
     novoRegistro.rg = rg;
@@ -107,6 +110,7 @@ void adicionaFinalSequencial(char nome[TAM], int rg,  Sequencial *lista)
 // Adiciona registro no inicio da Lista Sequencial
 void adicionaInicioSequencial(char nome[TAM], int rg,  Sequencial *lista)
 {
+    lista->ordenada = 0;
     Registro novoRegistro;
     strcpy(novoRegistro.nome, nome);
     novoRegistro.rg = rg;
@@ -128,6 +132,7 @@ void adicionaInicioSequencial(char nome[TAM], int rg,  Sequencial *lista)
 // Adiciona um registro na posição N da lista sequencial
 void adicionaNSequencial(char nome[15], int rg, int n, Sequencial *lista)
 {
+    lista->ordenada = 0;
     int i;
     Registro novoRegistro;
     strcpy(novoRegistro.nome, nome);
@@ -194,6 +199,7 @@ void removeFinalSequencial(Sequencial *lista)
 // Remove registro N da lista sequencial
 void removeNSequencial(Sequencial *lista, int n)
 {
+    lista->ordenada = 0;
     if(n < 0 || n >= lista->nElementos)
     {
         printf("Elemento %d nao pode ser retirado da lista, porque nao existe\n", n);
@@ -275,9 +281,11 @@ Registro **criaTabelaSequencial(Sequencial *lista)
     return tabela;
 }
 
+// Tabela de endereço para lista
 void tabelaParaSequencial(Sequencial *lista, Registro **tabela)
 {
     int i;
+    lista->ordenada = 1;
     Registro *temp = (Registro *) malloc(lista->nElementos * sizeof(Registro));
 
     for(i = 0; i < lista->nElementos; i++)

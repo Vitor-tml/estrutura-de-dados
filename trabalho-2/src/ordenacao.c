@@ -191,3 +191,23 @@ void imprimeTabela(Registro **tabela, int tamanho)
     for (i = 0; i < tamanho; i++)
         printf("|%3d|Nome: %-10s|RG: %8d|\n", i, (*tabela[i]).nome, (*tabela[i]).rg);
 }
+
+Registro *buscaBinaria(Registro** tabela, int tamanho, int chave) {
+    int inicio = 0;
+    int fim = tamanho - 1;
+    int meio;
+    while (inicio <= fim) {
+        meio = (inicio + fim) / 2;
+
+        if (tabela[meio]->rg == chave) {
+            return tabela[meio];
+        } else if (tabela[meio]->rg < chave) {
+            inicio = meio + 1;
+        } else {
+            fim = meio - 1;
+        }
+    }
+
+    printf("Elemento nao encontrado!\n");
+    return NULL;
+}

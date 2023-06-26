@@ -16,6 +16,7 @@ void iniciaEncadeada(Encadeada *lista)
     lista->primeiro = NULL;
     lista->tamanho = 0;
     lista->ultimo = NULL;
+    lista->ordenada = 0;
 }
 
 // Imprime na tela todos os elementos de uma Lista Encadeada.
@@ -66,6 +67,7 @@ int contagemEncadeada(Encadeada *lista)
 // Adiciona nó no início da lista encadeada
 void adicionaInicioEncadeada(char nome[TAM], int rg, Encadeada *lista)
 {
+    lista->ordenada = 0;
     // Define o novo nó e seus valores
     Registro *novoRegistro = (Registro *) malloc(sizeof(Registro));
     strcpy(novoRegistro->nome, nome);
@@ -91,6 +93,7 @@ void adicionaInicioEncadeada(char nome[TAM], int rg, Encadeada *lista)
 // Adiciona nó no Final da lista encadeada
 void adicionaFinalEncadeada(char nome[TAM], int rg, Encadeada *lista)
 {
+    lista->ordenada = 0;
     // Define o novo nó e seus valores
     Registro *novoRegistro = (Registro *) malloc(sizeof(Registro));
     strcpy(novoRegistro->nome, nome);
@@ -116,6 +119,7 @@ void adicionaFinalEncadeada(char nome[TAM], int rg, Encadeada *lista)
 // Adiciona um novo registro na posição N da lista encadeada
 void adicionaNEncadeada(char nome[TAM], int rg, int n, Encadeada *lista)
 {
+    lista->ordenada = 0;
     Registro *novoRegistro = (Registro *) malloc(sizeof(Registro));
     Registro *atual = lista->primeiro;
     strcpy(novoRegistro->nome, nome);
@@ -186,6 +190,7 @@ void removeFinalEncadeada(Encadeada *lista)
 // Remove registro na posição N da lista encadeada
 void removeNEncadeada(Encadeada *lista, int n)
 {
+    lista->ordenada = 0;
     if(n < 0 || n >= lista->tamanho)
     {
         printf("Registro %d nao pode ser retirado da lista encadeada, inexistente.\n", n);
@@ -311,6 +316,7 @@ Registro **criaTabelaEncadeada(Encadeada *lista)
 void tabelaParaEncadeada(Encadeada *lista, Registro **tabela)
 {
     int i;
+    lista->ordenada = 1;
     Registro *atual = lista->primeiro = tabela[0];
     atual->anterior = NULL;
     for(i = 1; i <  lista->tamanho; i++)
