@@ -311,9 +311,12 @@ Registro **criaTabelaEncadeada(Encadeada *lista)
 void tabelaParaEncadeada(Encadeada *lista, Registro **tabela)
 {
     int i;
-    Registro *atual = lista->primeiro;
-    for(i = 0; i < lista->tamanho - i; i++)
+    Registro *atual = lista->primeiro = tabela[0];
+    atual->anterior = NULL;
+    for(i = 1; i <  lista->tamanho; i++)
     {
-        atual = (*lista)[i];
+        atual->proximo = tabela[i];
+        atual = atual->proximo;
     }
+    atual->proximo = NULL;
 }

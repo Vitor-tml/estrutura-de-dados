@@ -43,6 +43,9 @@ int main()
     quickSort(tabela, 0, lista.tamanho - 1);
     printf("TABELA ORDENADA: \n");
     imprimeTabela(tabela, lista.tamanho);
+    tabelaParaEncadeada(&lista, tabela);
+    printf("TABELA SALVE: \n");
+    exibeEncadeada(&lista);
     
 }
 

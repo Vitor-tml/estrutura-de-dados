@@ -27,5 +27,7 @@ void buscaEncadeada(Encadeada *lista, int rg);
 void arquivoParaEncadeada(Encadeada *lista, FILE *arquivo, int nLinhas);
 void encadeadaParaArquivo(Encadeada *lista, FILE *arquivo);
 void desalocaEncadeada(Encadeada *lista_encadeada);
+void tabelaParaEncadeada(Encadeada *lista, Registro **tabela);
 Registro **criaTabelaEncadeada(Encadeada *lista);
+
 #endif
