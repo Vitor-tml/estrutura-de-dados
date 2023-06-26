@@ -192,22 +192,25 @@ void imprimeTabela(Registro **tabela, int tamanho)
         printf("|%3d|Nome: %-10s|RG: %8d|\n", i, (*tabela[i]).nome, (*tabela[i]).rg);
 }
 
-Registro *buscaBinaria(Registro** tabela, int tamanho, int chave) {
-    int inicio = 0;
-    int fim = tamanho - 1;
-    int meio;
-    while (inicio <= fim) {
-        meio = (inicio + fim) / 2;
-
-        if (tabela[meio]->rg == chave) {
-            return tabela[meio];
-        } else if (tabela[meio]->rg < chave) {
-            inicio = meio + 1;
-        } else {
-            fim = meio - 1;
-        }
+int buscaBinaria(Registro **tabela, int inicio, int fim, int chave)
+{
+    int meio = (inicio + fim)/2;
+    if(inicio > fim)
+    {
+        printf("Elemento nao encontrado!\n");
+        exit(1);
     }
+    int i;
+    //for(i = 0; i < 10; i++)
+    //printf("%10d == %10d | Meio %d\n", chave, (*tabela[i]).rg, i);
+    //imprimeTabela(tabela, 10);
+    //getchar();
+    if((*tabela[meio]).rg == chave)
+        return meio;
+    else
+        if((*tabela[meio]).rg < chave)
+            return buscaBinaria(tabela, meio + 1, fim, chave);
+        else
+            return buscaBinaria(tabela, inicio, meio - 1, chave);
 
-    printf("Elemento nao encontrado!\n");
-    return NULL;
 }
