@@ -28,6 +28,7 @@ void buscaSequencial(Sequencial *lista, int rg);
 void arquivoParaSequencial(Sequencial *lista, FILE *arquivo, int nLinhas);
 void sequencialParaArquivo(Sequencial *lista, FILE *arquivo);
 void desalocaSequencial(Sequencial *lista);
+void tabelaParaSequencial(Sequencial *lista, Registro **tabela);
 Registro **criaTabelaSequencial(Sequencial *lista);
 
 #endif

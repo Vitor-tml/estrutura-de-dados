@@ -29,23 +29,24 @@ void espera(char mensagem[]);
 int main()
 {
     srand(time(NULL));
-    Encadeada lista;
+    Sequencial lista;
     //Encadeada lista;
     Registro **tabela;
-    iniciaEncadeada(&lista);
-    preencheEncadeada(&lista, 10);
+    iniciaSequencial(&lista, 10);
+    preencheSequencial(&lista);
     // printf("LISTA GERADA: \n");
     // exibeEncadeada(&lista);
-    tabela = criaTabelaEncadeada(&lista);
+    tabela = criaTabelaSequencial(&lista);
     printf("TABELA GERADA: \n");
-    imprimeTabela(tabela, lista.tamanho);
-    printf("Tamanho da lista: %d\n", lista.tamanho);
-    quickSort(tabela, 0, lista.tamanho - 1);
+    imprimeTabela(tabela, lista.nElementos);
+    printf("Tamanho da lista: %d\n", lista.nElementos);
+    quickSort(tabela, 0, lista.nElementos - 1);
     printf("TABELA ORDENADA: \n");
-    imprimeTabela(tabela, lista.tamanho);
-    tabelaParaEncadeada(&lista, tabela);
+    imprimeTabela(tabela, lista.nElementos);
+    printf("%daaaaaaaaaaaaaasdfasfas\n", lista.nMax);
+    tabelaParaSequencial(&lista, tabela);
     printf("TABELA SALVE: \n");
-    exibeEncadeada(&lista);
+    exibeSequencial(&lista);
     
 }
 
