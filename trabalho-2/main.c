@@ -110,6 +110,7 @@ int main()
             }
             else
             {
+                iniciaContagem();
                 if(qualLista)
                 {
                     tamanho = encadeada.tamanho;
@@ -123,6 +124,7 @@ int main()
                 quickSort(tabela, 0, tamanho - 1);
                 busca = buscaBinaria(tabela, 0, tamanho, rg);
                 printf("|%3d|Nome: %-10s|RG: %8d|\n", busca, (*tabela[busca]).nome, (*tabela[busca]).rg);
+                terminaContagem();
             }
             espera("Busca efetuada.");
             break;
@@ -158,7 +160,8 @@ int main()
             espera("Fim da lista.");
             break;
         
-        case 7: // Escolher ordenação
+        case 7: // Ordenar arquivo
+            iniciaContagem();
             if(qualLista)
             {
                 tabela = criaTabelaEncadeada(&encadeada);
@@ -173,6 +176,8 @@ int main()
                 tabelaParaSequencial(&sequencial, tabela);
                 sequencial.ordenada = 1;
             }
+            terminaContagem();
+            espera(" ");
             break;
 
         case 8: // Saída

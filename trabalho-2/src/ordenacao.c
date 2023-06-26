@@ -4,6 +4,7 @@
 #include "registro.h"
 #include "encadeada.h"
 #include "sequencial.h"
+#include "performance.h"
 
 // Algoritmo que ordena colocando o menor elemento no inicio recursivamente
 void selectionSort(Registro **tabela, int tamanho)
@@ -16,6 +17,8 @@ void selectionSort(Registro **tabela, int tamanho)
         {
             if ((*tabela[i]).rg > (*tabela[j]).rg)
             {
+                Cn+=1;
+                Mn+=2;
                 aux = tabela[j];
                 tabela[j] = tabela[i];
                 tabela[i] = aux;
@@ -36,6 +39,8 @@ void insertionSort(Registro **tabela, int tamanho)
 
         while (j >= 0 && aux->rg < (*tabela[j]).rg)
         {
+            Cn+=2;
+            Mn+=1;
             tabela[j + 1] = tabela[j];
             j--;
         }
@@ -54,6 +59,8 @@ void bubbleSort(Registro **tabela, int tamanho)
             aux = tabela[i];
             if ((*tabela[i]).rg > (*tabela[i + 1]).rg)
             {
+                Cn+=1;
+                Mn+=2;
                 aux = tabela[i];
                 tabela[i] = tabela[i + 1];
                 tabela[i + 1] = aux;
@@ -81,6 +88,8 @@ void shellSort(Registro **tabela, int tamanho)
 
             while (j >= h && aux->rg < (*tabela[j - h]).rg)
             {
+                Cn+=2;
+                Mn+=1;
                 tabela[j] = tabela[j - h];
                 j -= h;
             }
@@ -110,14 +119,21 @@ int particiona(Registro **tabela, int inicio, int fim)
     while (1)
     {
         while (tabela[i]->rg < pivo->rg)
+        {
             i++;
+            Cn++;
+        }
 
         while (tabela[j]->rg > pivo->rg)
+        {
             j--;
+            Cn++;
+        }
 
         if (i >= j)
             return j;
 
+        Mn+=3;
         Registro *aux = tabela[i];
         tabela[i] = tabela[j];
         tabela[j] = aux;
@@ -162,6 +178,8 @@ void merge(Registro **tabela, int inicio, int meio, int fim)
     {
         if(!fimI && !fimJ) // Se nenhum vetor acabou
         {
+            Cn+=1;
+            Mn+=1;
             if ((*tabela[i]).rg < (*tabela[j]).rg) // Coloca o menor valor ainda não colocado entre os dois vetores
                 aux[l] = tabela[i++];
             else
@@ -181,7 +199,10 @@ void merge(Registro **tabela, int inicio, int meio, int fim)
         }
     }
     for(i = 0, j = inicio; i < tamanho; i++, j++)
+    {
         tabela[j] = aux[i];
+        Mn+=1;
+    }
 }
 
 void imprimeTabela(Registro **tabela, int tamanho)
@@ -194,6 +215,8 @@ void imprimeTabela(Registro **tabela, int tamanho)
 
 int buscaBinaria(Registro **tabela, int inicio, int fim, int chave)
 {
+    Cn+=1;
+    Mn+=1;
     int meio = (inicio + fim)/2;
     if(inicio > fim)
     {
