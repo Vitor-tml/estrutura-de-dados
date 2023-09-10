@@ -1,3 +1,6 @@
+# Atenção!
+As funções se encontram declaradas em arquivos dentro da pasta include e definidas em arquivos da pasta src. Caso queira rodar o programa primeiro rode os comandos ```Make rep``` e ```Make rename``` para criar as pastas destino e renomear os arquivos de teste (disponíveis no site do professor).
+
 # Descrição
 Um programa que implemente duas formas de armazenar dados (lista encadeada e lista sequencial). Os dados armazenados serão nome e RG e o programa deve rodas as duas formas paralelamente mostrar a diferença de tempo entre cada tipo de lista.
 O usuário tem as seguintes opções:
