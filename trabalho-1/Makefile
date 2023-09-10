@@ -31,9 +31,9 @@ exe:
 	./output/main.exe
 
 rep:
-	mkdir ./output
-	mkdir ./obj
-	mkdir ./data
+	mkdir output
+	mkdir obj
+	mkdir madata
 
 rename:
 	mv ./data/NomeRG1K.txt "./data/4) NomeRG1K.txt"
